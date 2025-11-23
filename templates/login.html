@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="hero-title">Sign in</h2>
+<div class="panel card">
+  <form method="post" action="{{ url_for('login') }}">
+    <div class="input-block"><input name="email" type="email" placeholder="Email" required></div>
+    <div class="input-block"><input name="password" type="password" placeholder="Password" required></div>
+    <div class="actions">
+      <button class="btn-verify" type="submit">Sign In</button>
+    </div>
+  </form>
+  <p style="margin-top:12px;color:var(--muted)">Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+</div>
+{% endblock %}

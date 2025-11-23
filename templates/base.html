@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>SATYA AI — Verification Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <nav class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="SATYA AI" class="logo" />
+        <div class="brand-text">
+          <div class="title">SatyaAI</div>
+        </div>
+      </div>
+      <div class="navlinks">
+        <a href="#">How It Works</a>
+        <a href="#">Privacy</a>
+        <a href="#">Dashboard</a>
+        <a class="btn-outline" href="#">Try Demo</a>
+        <a class="btn-signin" href="#">Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container main">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for m in messages %}
+            <div class="flash-item">{{ m }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    SATYA AI — Blue & White
+  </footer>
+</body>
+</html>

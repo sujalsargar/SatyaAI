@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1 class="hero-title">Verification Dashboard</h1>
+  <p class="hero-sub">Submit content for analysis below.</p>
+
+  <div class="panel card">
+    <form action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data" id="analyzeForm">
+      <div class="tabs">
+        <button type="button" data-type="text" class="tab active">📄 Text</button>
+        <button type="button" data-type="url" class="tab">🔗 URL</button>
+        <button type="button" data-type="image" class="tab">🖼 Image</button>
+      </div>
+
+      <div id="textBox" class="input-block">
+        <textarea name="text" placeholder="Paste a message or article text here..." class="big-textarea"></textarea>
+      </div>
+
+      <div id="urlBox" class="input-block" style="display:none;">
+        <input name="url" type="url" class="input" placeholder="https://example.com/article" />
+      </div>
+
+      <div id="fileBox" class="input-block" style="display:none;">
+        <input name="file" type="file" class="input" />
+      </div>
+
+      <input type="hidden" name="type" id="typeInput" value="text" />
+
+      <div class="actions">
+        <button class="btn-verify" type="submit">✈️ Verify Now</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const textBox = document.getElementById('textBox');
+  const urlBox = document.getElementById('urlBox');
+  const fileBox = document.getElementById('fileBox');
+  const typeInput = document.getElementById('typeInput');
+
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      const typ = t.getAttribute('data-type');
+      typeInput.value = typ;
+      textBox.style.display = typ === 'text' ? '' : 'none';
+      urlBox.style.display = typ === 'url' ? '' : 'none';
+      fileBox.style.display = (typ === 'image' || typ === 'audio' || typ === 'video') ? '' : 'none';
+    });
+  });
+</script>
+{% endblock %}
