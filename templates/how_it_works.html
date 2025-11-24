@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">How SatyaAI Works</h1>
+    <p class="hero-lead">A step-by-step verification pipeline for text, URLs, images, audio, and video.</p>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <h3>1. Ingest</h3>
+        <p>Accepts text, article URLs, image uploads (OCR), audio files (speech-to-text) and video (audio extraction + frame OCR).</p>
+      </div>
+
+      <div class="how-card">
+        <h3>2. Extract</h3>
+        <p>OCR (Tesseract) for images/frames, Whisper for speech-to-text, and HTML scraping for URLs.</p>
+      </div>
+
+      <div class="how-card">
+        <h3>3. Cross-check</h3>
+        <p>Compare extracted claims with trusted sources like Wikipedia, Google News, Snopes, FactCheck, PolitiFact.</p>
+      </div>
+
+      <div class="how-card">
+        <h3>4. Reason</h3>
+        <p>Ask the LLM (OpenAI/Gemini) to weigh evidence and provide a structured verdict with confidence and sources.</p>
+      </div>
+
+      <div class="how-card">
+        <h3>5. Return</h3>
+        <p>Structured JSON result and a human-readable explanation, saved to your history for audit and review.</p>
+      </div>
+
+      <div class="how-card">
+        <h3>6. Action</h3>
+        <p>Risk score and sources help you decide — share, flag, or archive results from the dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

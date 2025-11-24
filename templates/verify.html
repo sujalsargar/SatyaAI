@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="verify" style="padding:24px;">
+  <div class="panel">
+    <h2 style="margin:0 0 8px; color:var(--accent)">Verification Dashboard</h2>
+    <p class="muted" style="margin:0 0 16px;">Submit text, URL, image, audio or video for SATYA AI to analyze.</p>
+
+    <!-- tabs -->
+    <div class="tabs" role="tablist" style="margin-bottom:12px;">
+      <button data-type="text" class="tab active">Text</button>
+      <button data-type="url" class="tab">URL</button>
+      <button data-type="image" class="tab">Image</button>
+      <button data-type="video" class="tab">Video</button>
+      <button data-type="audio" class="tab">Audio</button>
+    </div>
+
+    <form id="analyze-form" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="type" id="input-type" value="text" />
+      <div id="input-controls">
+        <textarea name="text" id="text-input" class="big-textarea" placeholder="Paste text or article content..."></textarea>
+        <input type="url" name="url" id="url-input" class="input" placeholder="Enter article URL" style="display:none; margin-top:8px;" />
+        <input type="file" name="file" id="file-input" accept="image/*,video/*,audio/*" style="display:none; margin-top:8px;" />
+      </div>
+
+      <div class="actions" style="margin-top:16px;">
+        <button class="btn-verify" type="submit">✈ Verify Now</button>
+      </div>
+    </form>
+  </div>
+
+  <div style="margin-top:18px;">
+    <a href="{{ url_for('history') }}" class="btn-outline">View history</a>
+    <a href="{{ url_for('privacy') }}" class="btn-outline">Privacy</a>
+  </div>
+</section>
+
+<script>
+  (function(){
+    const tabs = document.querySelectorAll('.tab');
+    const inputTypeEl = document.getElementById('input-type');
+    const textInput = document.getElementById('text-input');
+    const urlInput = document.getElementById('url-input');
+    const fileInput = document.getElementById('file-input');
+
+    function setTab(t){
+      tabs.forEach(tb=>tb.classList.remove('active'));
+      t.classList.add('active');
+      const typ = t.dataset.type;
+      inputTypeEl.value = typ;
+      textInput.style.display = typ==='text'? 'block' : 'none';
+      urlInput.style.display = typ==='url'? 'block' : 'none';
+      fileInput.style.display = (typ==='image' || typ==='video' || typ==='audio')? 'block' : 'none';
+      if(typ==='image') fileInput.accept='image/*';
+      if(typ==='video') fileInput.accept='video/*';
+      if(typ==='audio') fileInput.accept='audio/*';
+    }
+
+    tabs.forEach(t=>t.addEventListener('click', ()=>setTab(t)));
+    document.addEventListener('DOMContentLoaded', ()=> setTab(document.querySelector('.tab.active')));
+  })();
+</script>
+{% endblock %}

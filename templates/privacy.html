@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Privacy & Data</h2>
+  <p>SatyaAI processes uploads and user inputs only for verification purposes. Uploaded files are stored temporarily in the server upload folder and removed after processing (unless you keep them in history).</p>
+
+  <h3>What we store</h3>
+  <ul>
+    <li>Analysis results (status, confidence, reasoning, sources, risk score)</li>
+    <li>Small text snippet of the input (truncated)</li>
+    <li>User metadata for account and history management</li>
+  </ul>
+
+  <h3>What we don't share</h3>
+  <ul>
+    <li>We never publish your uploaded media or private data.</li>
+    <li>OpenAI / LLM calls use your configured API key; usage occurs on the server and costs are billed to the key owner.</li>
+  </ul>
+
+  <p>If you want data deleted, use the Dashboard to remove history items or contact the administrator.</p>
+</div>
+{% endblock %}
