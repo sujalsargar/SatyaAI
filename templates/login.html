@@ -1,14 +1,64 @@
 {% extends "base.html" %}
+{% block title %}Sign in — TruthMate{% endblock %}
+
 {% block content %}
-<h2 class="hero-title">Sign in</h2>
-<div class="panel card">
-  <form method="post" action="{{ url_for('login') }}">
-    <div class="input-block"><input name="email" type="email" placeholder="Email" required></div>
-    <div class="input-block"><input name="password" type="password" placeholder="Password" required></div>
-    <div class="actions">
-      <button class="btn-verify" type="submit">Sign In</button>
+<div class="auth-wrap">
+  <div class="auth-card animate-fadeup">
+    <h2 class="hero-title">Sign in</h2>
+
+    <form class="auth-form" method="post" action="{{ url_for('login') }}">
+      <!-- EMAIL -->
+      <label class="field">
+        <span class="field-icon">✉️</span>
+        <input id="email" name="email" type="email" placeholder=" " required>
+        <span class="floating-label">Email</span>
+      </label>
+
+      <!-- PASSWORD (with show/hide) -->
+      <label class="field" style="position:relative;">
+        <span class="field-icon">🔒</span>
+        <input id="password" name="password" type="password" placeholder=" " required>
+        <span class="floating-label">Password</span>
+
+        <!-- show/hide toggle -->
+        <button type="button" id="pw-toggle" class="btn-outline" style="position:absolute; right:8px; top:8px; padding:6px 8px; font-size:13px;">
+          Show
+        </button>
+      </label>
+
+      <!-- Submit -->
+      <div class="auth-row" style="margin-top:14px;">
+        <button class="btn-verify" type="submit">Sign In</button>
+      </div>
+    </form>
+
+    <div style="margin-top:12px;" class="muted">
+      Don't have an account?
+      <a href="{{ url_for('signup') }}">Sign up</a>
     </div>
-  </form>
-  <p style="margin-top:12px;color:var(--muted)">Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
+  </div>
 </div>
+
+<!-- Inline script to toggle password visibility -->
+<script>
+  (function(){
+    const pwInput = document.getElementById('password');
+    const toggle = document.getElementById('pw-toggle');
+    if (!pwInput || !toggle) return;
+
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      if (pwInput.type === 'password') {
+        pwInput.type = 'text';
+        toggle.textContent = 'Hide';
+        toggle.classList.add('active');
+      } else {
+        pwInput.type = 'password';
+        toggle.textContent = 'Show';
+        toggle.classList.remove('active');
+      }
+      pwInput.focus();
+    });
+  })();
+</script>
 {% endblock %}

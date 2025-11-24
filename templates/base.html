@@ -4,39 +4,56 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>TruthMate — Verification Dashboard</title>
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
+
+  <!-- ======================= -->
+  <!--        TOP NAVBAR       -->
+  <!-- ======================= -->
   <nav class="topbar">
     <div class="container topbar-inner">
+
+      <!-- BRAND (TEXT ONLY, NO LOGO) -->
       <div class="brand">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="TruthMate" class="logo" />
         <div class="brand-text">
           <div class="title">TruthMate</div>
         </div>
       </div>
 
+      <!-- NAV LINKS -->
       <div class="navlinks">
-        <a href="/how-it-works">How It Works</a>
-        <a href="/privacy">Privacy</a>
+
+        <a href="{{ url_for('how_it_works') }}">How It Works</a>
+        <a href="{{ url_for('privacy') }}">Privacy</a>
 
         {% if current_user.is_authenticated %}
-          <a href="/dashboard">Dashboard</a>
+          
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
 
           <form action="{{ url_for('logout') }}" method="POST" style="display:inline;">
-            <button class="btn-signin" type="submit" style="background:none;border:none;color:#00e6d1;cursor:pointer;">
+            <button class="btn-signin" type="submit"
+              style="background:none;border:none;color:var(--accent);cursor:pointer;">
               Logout
             </button>
           </form>
 
         {% else %}
-          <a class="btn-outline" href="/try-demo">Try Demo</a>
-          <a class="btn-signin" href="/login">Login</a>
+          <a class="btn-outline" href="{{ url_for('try_demo') }}">Try Demo</a>
+          <a class="btn-signin" href="{{ url_for('login') }}">Login</a>
         {% endif %}
       </div>
+
     </div>
   </nav>
 
+
+  <!-- ======================= -->
+  <!--          MAIN           -->
+  <!-- ======================= -->
   <main class="container main">
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -47,11 +64,17 @@
         </div>
       {% endif %}
     {% endwith %}
+
     {% block content %}{% endblock %}
   </main>
 
+
+  <!-- ======================= -->
+  <!--         FOOTER          -->
+  <!-- ======================= -->
   <footer class="footer">
     TruthMate — Blue & White
   </footer>
+
 </body>
 </html>

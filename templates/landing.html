@@ -1,99 +1,145 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero" style="padding:56px 0;">
-  <div class="container">
-    <div class="hero-row">
-      <div class="hero-left">
-        <!-- UPDATED TITLE -->
-        <h1 class="hero-title animate-fadeup">TruthMate — Fake-news detection</h1>
 
-        <p class="hero-sub animate-fadeup delay-1">
-          Analyze text, articles, images, audio and video with a single click.
-          TruthMate extracts claims, checks trusted sources and returns a clear verdict
-          with confidence and sources.
-        </p>
+<div class="container">
 
-        <div class="hero-ctas animate-fadeup delay-2">
-          <a class="btn-verify" href="{{ url_for('verify') }}">Get Started — Verify Now</a>
-          <a class="btn-outline" href="{{ url_for('how_it_works') }}">Learn how it works</a>
-          <a class="btn-outline" href="{{ url_for('privacy') }}">Privacy</a>
+  <!-- =========================== -->
+  <!--         HERO ROW            -->
+  <!-- =========================== -->
+  <div class="hero-row">
+
+    <!-- LEFT: Logo beside headline -->
+    <div class="hero-left">
+
+      <!-- HERO: logo + headline next to each other -->
+      <div class="hero-headline-row animate-fadeup">
+        
+        <!-- LOGO (uses truthmate.png from static/) -->
+        <img src="{{ url_for('static', filename='truthmate.png') }}" 
+             alt="TruthMate logo" 
+             class="hero-logo">
+
+        <!-- TITLE + SUBTITLE -->
+        <div class="hero-text">
+          <h1 class="hero-title">TruthMate — Fake-news detection</h1>
+
+          <p class="hero-sub">
+            Analyze text, articles, images, audio and video with a single click.
+            TruthMate extracts claims, checks trusted sources and returns a clear
+            verdict with confidence and verified citations.
+          </p>
         </div>
 
-        <div style="margin-top:18px;" class="animate-fadeup delay-3">
-          <strong>Trusted sources:</strong> Wikipedia · Google News · Snopes · FactCheck.org · PolitiFact
-        </div>
       </div>
 
-      <div class="hero-right animate-fadeup delay-2">
-        <div class="hero-mock">
-          <img src="{{ url_for('static', filename='logo.png') }}" alt="TruthMate" class="hero-mock-img"/>
-          <div class="muted small">TruthMate — Fake news verification dashboard preview</div>
-        </div>
+      <!-- CTA BUTTONS -->
+      <div class="hero-ctas animate-fadeup delay-3">
+        <a class="btn-verify no-underline" href="{{ url_for('verify') }}">
+          Get Started — Verify Now
+        </a>
+
+        <a class="btn-outline no-underline" href="{{ url_for('how_it_works') }}">
+          Learn how it works
+        </a>
+
+        <a class="btn-outline no-underline" href="{{ url_for('privacy') }}">
+          Privacy
+        </a>
       </div>
+
+      <div style="margin-top:18px;" class="animate-fadeup delay-4">
+        <strong>Trusted sources:</strong> Wikipedia · Google News · Snopes · FactCheck.org · PolitiFact
+      </div>
+
     </div>
 
-    <!-- FEATURES GRID -->
-    <div class="landing-features-grid animate-fadeup delay-4" style="margin-top:36px;">
-      <div class="how-card bordered">
-        <div class="how-row">
-          <div class="how-icon" aria-hidden="true">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.2" opacity="0.95"></rect>
-              <path d="M17 7V3" stroke="currentColor" stroke-width="1.2" opacity="0.95"></path>
-            </svg>
-          </div>
-          <div class="how-content">
-            <h3 class="how-title">Multi-format</h3>
-            <p class="muted">Text, article URLs, images (OCR), audio (speech-to-text), and video (audio + frames).</p>
-          </div>
-        </div>
-      </div>
+    <!-- RIGHT SIDE: REMOVED THE BIG IMAGE -->
+    <!-- (empty right column to keep layout aligned) -->
+    <div class="hero-right"></div>
 
-      <div class="how-card bordered">
-        <div class="how-row">
-          <div class="how-icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3v18" stroke="currentColor" stroke-width="1.2"/>
-              <path d="M6 7c-1.3 1.3-1.3 3.5 0 4.8 1.3 1.3 3.5 1.3 4.8 0 1.3-1.3 1.3-3.5 0-4.8" stroke="currentColor" stroke-width="1.2"/>
-              <path d="M18 8c1.3 1.3 1.3 3.5 0 4.8-1.3 1.3-3.5 1.3-4.8 0-1.3-1.3-1.3-3.5 0-4.8" stroke="currentColor" stroke-width="1.2"/>
-            </svg>
-          </div>
-          <div class="how-content">
-            <h3 class="how-title">Explainable reasoning</h3>
-            <p class="muted">Structured verdict with sources, confidence and risk score — backed by LLM reasoning.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="how-card bordered">
-        <div class="how-row">
-          <div class="how-icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 12a9 9 0 1 0-3 6.7" stroke="currentColor" stroke-width="1.2"/>
-              <path d="M12 7v6l4 2" stroke="currentColor" stroke-width="1.2"/>
-            </svg>
-          </div>
-          <div class="how-content">
-            <h3 class="how-title">User history</h3>
-            <p class="muted">Saved checks for audit and sharing in your dashboard.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="how-card bordered">
-        <div class="how-row">
-          <div class="how-icon">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3l7 4v5c0 5-3.4 9.7-7 11-3.6-1.3-7-6-7-11V7l7-4z" stroke="currentColor" stroke-width="1.2"/>
-            </svg>
-          </div>
-          <div class="how-content">
-            <h3 class="how-title">Secure</h3>
-            <p class="muted">Uploads kept private; developer-owned OpenAI key for LLM calls.</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-</section>
+
+
+  <!-- ======================= -->
+  <!--      FEATURES GRID      -->
+  <!-- ======================= -->
+
+  <div class="landing-features-grid" style="margin-top:36px;">
+
+    <!-- Feature 1 -->
+    <div class="how-card bordered animate-fadeup delay-1">
+      <div class="how-row">
+        <div class="how-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.2"></rect>
+            <path d="M17 7V3" stroke="currentColor" stroke-width="1.2"></path>
+          </svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">Multi-format</h3>
+          <p class="muted">
+            Text, URLs, images (OCR), audio (speech-to-text) and video (scene + audio frames).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="how-card bordered animate-fadeup delay-2">
+      <div class="how-row">
+        <div class="how-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24">
+            <path d="M12 3v18" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M6 7c-1.3 1.3-1.3 3.5 0 4.8 1.3 1.3 3.5 1.3 4.8 0 1.3-1.3 1.3-3.5 0-4.8" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M18 8c1.3 1.3 1.3 3.5 0 4.8-1.3 1.3-3.5 1.3-4.8 0-1.3-1.3-1.3-3.5 0-4.8" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">Explainable reasoning</h3>
+          <p class="muted">
+            Transparent evidence, confidence score and risk analysis powered by LLM reasoning.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="how-card bordered animate-fadeup delay-3">
+      <div class="how-row">
+        <div class="how-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24">
+            <path d="M21 12a9 9 0 1 0-3 6.7" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M12 7v6l4 2" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">User history</h3>
+          <p class="muted">
+            Your checks are saved to your dashboard for future review.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 4 -->
+    <div class="how-card bordered animate-fadeup delay-4">
+      <div class="how-row">
+        <div class="how-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24">
+            <path d="M12 3l7 4v5c0 5-3.4 9.7-7 11-3.6-1.3-7-6-7-11V7l7-4z" stroke="currentColor" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">Secure</h3>
+          <p class="muted">
+            Files stay private; OpenAI calls use your server-side API key only.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 {% endblock %}

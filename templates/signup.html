@@ -1,15 +1,46 @@
 {% extends "base.html" %}
+{% block title %}Create account — TruthMate{% endblock %}
 {% block content %}
-<h2 class="hero-title">Create account</h2>
-<div class="panel card">
-  <form method="post" action="{{ url_for('signup') }}">
-    <div class="input-block"><input name="name" type="text" placeholder="Full name"></div>
-    <div class="input-block"><input name="email" type="email" placeholder="Email" required></div>
-    <div class="input-block"><input name="password" type="password" placeholder="Password" required></div>
-    <div class="actions">
-      <button class="btn-verify" type="submit">Create account</button>
+
+<div class="auth-wrap">
+  <div class="auth-card animate-fadeup">
+    <h2>Create account</h2>
+
+    <form class="auth-form" method="post" action="{{ url_for('signup') }}">
+      
+      <!-- FULL NAME -->
+      <label class="field">
+        <span class="field-icon">👤</span>
+        <input id="name" name="name" type="text" placeholder=" " required>
+        <span class="floating-label">Full name</span>
+      </label>
+
+      <!-- EMAIL -->
+      <label class="field">
+        <span class="field-icon">✉️</span>
+        <input id="email" name="email" type="email" placeholder=" " required>
+        <span class="floating-label">Email</span>
+      </label>
+
+      <!-- PASSWORD -->
+      <label class="field">
+        <span class="field-icon">🔒</span>
+        <input id="password" name="password" type="password" placeholder=" " required>
+        <span class="floating-label">Password</span>
+      </label>
+
+      <!-- SUBMIT BUTTON ROW -->
+      <div class="auth-row">
+        <button class="btn-verify" type="submit">Create account</button>
+      </div>
+
+    </form>
+
+    <div style="margin-top:12px;" class="muted">
+      Already have an account?
+      <a href="{{ url_for('login') }}">Sign in</a>
     </div>
-  </form>
-  <p style="margin-top:12px;color:var(--muted)">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
+  </div>
 </div>
+
 {% endblock %}

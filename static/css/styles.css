@@ -1,59 +1,386 @@
-/* Colors: dark navy background, cyan neon accents like screenshot */
+/* ================================
+   FULL styles.css — SATYA AI / TruthMate
+   (paste this entire file into static/css/styles.css)
+   ================================ */
+
+/* ================================
+   GLOBAL THEME & COLORS
+   ================================ */
 :root {
   --bg:#071018;
   --panel:#0e1720;
   --muted:#6f8289;
+
+  /* ACCENT COLOR = headline color */
+  --accent:#17FFF2;     /* neon cyan */
   --cyan:#17FFF2;
-  --accent:#0B66FF;
 }
 
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(180deg,#080e12,#071018);color:#e6f7f6}
+/* Reset */
+*{ box-sizing:border-box; }
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Roboto,Helvetica,Arial;
+  background:linear-gradient(180deg,#080e12,#071018);
+  color:#e6f7f6;
+}
 
-.topbar{background:transparent;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
-.topbar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:42px;height:42px;border-radius:8px;object-fit:cover;border:2px solid rgba(23,255,242,0.08)}
-.brand-text .title{color:var(--cyan);font-weight:700;font-size:18px}
-.navlinks a{color:rgba(255,255,255,0.7);margin-left:16px;text-decoration:none}
-.btn-outline{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.85);text-decoration:none}
-.btn-signin{padding:8px 10px;border-radius:8px;border:1px solid rgba(23,255,242,0.18);color:var(--cyan);background:transparent;text-decoration:none}
+/* ================================
+   TOPBAR
+   ================================ */
+.topbar{
+  background:transparent;
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,0.02);
+}
+.topbar-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+}
+.brand{ display:flex; align-items:center; gap:12px; }
 
-/* main container */
-.container{max-width:1000px;margin:24px auto;padding:0 18px}
-.hero{padding:24px 0;text-align:center}
-.hero-title{font-size:44px;margin:6px;color:var(--cyan);font-weight:800}
-.hero-sub{color:var(--muted);margin-top:8px}
+.logo{
+  width:48px;
+  height:auto;
+  object-fit:contain;
+  border-radius:8px;
+  border:2px solid var(--accent);
+  box-shadow:0 0 14px rgba(23,255,242,0.3);
+}
 
-/* panel */
-.panel{background:linear-gradient(180deg,rgba(12,20,26,0.9),rgba(9,15,20,0.85));border-radius:12px;padding:22px;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 40px rgba(23,255,242,0.03)}
-.card{}
+.brand-text .title{
+  color:var(--accent);
+  font-weight:700;
+  font-size:20px;
+}
 
-/* tabs */
-.tabs{display:flex;gap:12px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;margin-bottom:14px}
-.tab{padding:10px 14px;border-radius:8px;color:#cfeff0;background:transparent;border:none;cursor:pointer}
-.tab.active{background:#081a20;border:1px solid rgba(255,255,255,0.02)}
+.navlinks a{
+  color:rgba(255,255,255,0.7);
+  margin-left:16px;
+  text-decoration:none;
+}
 
-/* inputs */
-.input-block{margin-top:12px}
-.big-textarea{width:100%;min-height:170px;border-radius:10px;padding:14px;background:#07131a;border:1px solid rgba(255,255,255,0.02);color:#dff;resize:vertical}
-.input{width:100%;padding:12px;border-radius:8px;background:#07131a;border:1px solid rgba(255,255,255,0.02);color:#dff}
+/* ================================
+   BUTTONS — border matches accent
+   ================================ */
+.btn-outline, .btn-signin, .btn-primary, .btn-logout {
+  border:2px solid var(--accent) !important;
+  color:var(--accent);
+  padding:10px 14px;
+  border-radius:10px;
+  background:transparent;
+  text-decoration:none !important;
+  font-weight:600;
+  display:inline-block;
+  transition:transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s cubic-bezier(.2,.9,.2,1);
+  position:relative;
+  will-change:transform,box-shadow;
+}
 
-/* button */
-.actions{margin-top:16px}
-.btn-verify{background:linear-gradient(90deg,var(--cyan), #00d2df);color:#062426;border:none;padding:14px 18px;border-radius:10px;font-weight:800;cursor:pointer;width:100%;font-size:16px}
-.btn-verify:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(23,255,242,0.08)}
+.btn-outline:hover,
+.btn-signin:hover,
+.btn-primary:hover,
+.btn-logout:hover{
+  background:rgba(23,255,242,0.08);
+  color:white;
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(23,255,242,0.1);
+}
 
-/* result display */
-.result-row{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.02);align-items:flex-start}
-.label{width:110px;color:var(--muted);font-weight:700}
-.value{flex:1}
-.pill{padding:8px 12px;border-radius:999px;color:#051617;font-weight:800}
-.pill-true{background:#34d399}
-.pill-fake{background:#ef4444}
-.pill-unknown{background:#f59e0b}
-.reasoning{white-space:pre-wrap;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px}
+/* Verify button special (primary) */
+.btn-verify{
+  background:var(--accent);
+  color:#051617;
+  border-radius:10px;
+  padding:14px 18px;
+  font-weight:800;
+  text-decoration:none;
+  display:inline-block;
+  transition:transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s cubic-bezier(.2,.9,.2,1);
+  box-shadow:
+    0 6px 12px rgba(2,8,14,0.45),
+    0 18px 45px rgba(23,255,242,0.06);
+}
+.btn-verify:hover{
+  box-shadow:
+    0 26px 48px rgba(2,8,14,0.6),
+    0 48px 120px rgba(23,255,242,0.12),
+    0 6px 0 rgba(0,0,0,0.2) inset;
+  transform: translateY(-10px) rotateX(1.2deg) scale(1.03);
+}
 
-/* small helpers */
-.flash{margin-bottom:12px}
-.footer{max-width:1100px;margin:20px auto;text-align:center;color:var(--muted);padding:10px}
+/* ================================
+   HERO SECTION
+   ================================ */
+.container{ max-width:1080px; margin:24px auto; padding:0 18px; }
+.hero-row{ display:flex; gap:36px; align-items:center; flex-wrap:wrap; }
+.hero-title{
+  font-size:44px;
+  margin:6px 0;
+  color:var(--accent);
+  font-weight:800;
+}
+.hero-sub{ color:var(--muted); margin-top:8px; }
+
+.hero-ctas{
+  margin-top:22px;
+  display:flex;
+  gap:14px;            /* spacing improved */
+  flex-wrap:wrap;
+}
+
+/* ================================
+   HERO: logo beside headline
+   ================================ */
+.hero-headline-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hero-logo {
+  width: 96px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  border: 3px solid var(--accent);
+  box-shadow: 0 10px 30px rgba(23,255,242,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding: 6px;
+}
+
+/* ensure the hero text remains left-aligned next to the logo */
+.hero-text { min-width: 240px; }
+
+/* responsive: smaller screens stack vertically */
+@media (max-width: 720px) {
+  .hero-headline-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-text { min-width: unset; }
+  .hero-logo { width: 84px; }
+}
+
+/* ================================
+   FEATURE CARDS (2×2 GRID)
+   ================================ */
+.landing-features-grid{
+  display:grid;
+  gap:16px;
+}
+@media(min-width:720px){
+  .landing-features-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+.how-card{
+  background:var(--panel);
+  padding:18px;
+  border-radius:12px;
+  border:2px solid var(--accent);
+  box-shadow:0 8px 30px rgba(2,8,14,0.5);
+  transition:0.2s ease;
+  position:relative;
+}
+.how-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(23,255,242,0.1);
+}
+
+.how-title{
+  color:var(--accent);
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+/* ================================
+   MODERN LOGIN / SIGNUP INPUTS
+   ================================ */
+.auth-wrap{ display:flex; justify-content:center; padding:30px 0; }
+.auth-card{
+  background:var(--panel);
+  padding:28px;
+  border-radius:14px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.4);
+  border:1px solid rgba(255,255,255,0.05);
+  width:420px;
+  margin:auto;
+}
+
+.auth-card h2{
+  color:var(--accent);
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.auth-form label{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* field container for floating label + icon */
+.field{
+  position:relative;
+  display:block;
+  margin-top:12px;
+}
+
+/* icon on left */
+.field-icon{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  pointer-events:none;
+  opacity:0.95;
+  font-size:16px;
+}
+
+/* input base */
+.auth-form input{
+  width:100%;
+  padding:14px 14px 14px 44px; /* space for icon */
+  margin-top:6px;
+  background:#07131a;
+  border:2px solid rgba(255,255,255,0.06);
+  border-radius:10px;
+  color:white;
+  transition:0.18s ease;
+  font-size:15px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* placeholder blank so floating label works visually */
+.auth-form input::placeholder { color: transparent; }
+
+/* floating label */
+.floating-label{
+  position:absolute;
+  left:44px;
+  top:50%;
+  transform:translateY(-50%);
+  transition: all .18s ease;
+  color:rgba(255,255,255,0.6);
+  pointer-events:none;
+  font-size:14px;
+}
+
+/* when input has focus or value, reduce label and move it up */
+.field input:focus + .floating-label,
+.field input:not(:placeholder-shown) + .floating-label {
+  top:-10px;
+  left:12px;
+  transform:none;
+  font-size:12px;
+  color:var(--accent);
+  background:transparent;
+  padding:0 6px;
+}
+
+/* focus style for input */
+.auth-form input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 12px rgba(23,255,242,0.25);
+  outline:none;
+  transform:scale(1.01);
+}
+
+/* small helper row under inputs */
+.auth-row{
+  margin-top:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+/* checkbox inline */
+.checkbox-inline{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:14px;
+}
+.checkbox-inline input{ transform:scale(1.05); }
+
+/* subtle link style */
+.auth-card a{ color:var(--accent); text-decoration:underline; }
+
+/* FLASH */
+.flash-item{
+  background:rgba(23,255,242,0.08);
+  padding:10px 12px;
+  border-radius:8px;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+
+/* ================================
+   3D BUTTON: hover/active/accessibility
+   ================================ */
+.btn-outline, .btn-signin, .btn-primary, .btn-verify, .btn-logout {
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s cubic-bezier(.2,.9,.2,1);
+  transform-origin: center;
+  position: relative;
+  will-change: transform, box-shadow;
+}
+
+/* default subtle shadow */
+.btn-outline, .btn-signin, .btn-primary {
+  box-shadow:
+    0 2px 0 rgba(0,0,0,0.2),
+    0 6px 18px rgba(2,8,14,0.35);
+}
+
+/* HOVER: lift + layered glowy shadows for 3D feel */
+.btn-outline:hover, .btn-signin:hover, .btn-primary:hover {
+  transform: translateY(-8px) rotateX(1deg) scale(1.02);
+  box-shadow:
+    0 14px 30px rgba(2,8,14,0.45),
+    0 32px 80px rgba(23,255,242,0.08),
+    0 4px 0 rgba(0,0,0,0.2) inset;
+}
+
+/* stronger hover for primary/verify */
+.btn-verify:hover {
+  transform: translateY(-10px) rotateX(1.2deg) scale(1.03);
+  box-shadow:
+    0 26px 48px rgba(2,8,14,0.6),
+    0 48px 120px rgba(23,255,242,0.12),
+    0 6px 0 rgba(0,0,0,0.2) inset;
+}
+
+/* ACTIVE (press) — reverse the lift to show press */
+.btn-outline:active, .btn-signin:active, .btn-primary:active, .btn-verify:active {
+  transform: translateY(-2px) scale(0.995);
+  box-shadow:
+    0 6px 10px rgba(2,8,14,0.5),
+    0 12px 30px rgba(23,255,242,0.04);
+}
+
+/* focus-visible accessibility */
+.btn-outline:focus-visible, .btn-verify:focus-visible, .btn-signin:focus-visible {
+  outline:3px solid rgba(23,255,242,0.12);
+  outline-offset: 4px;
+}
+
+/* small tweak for spacing between CTAs (hero) */
+.hero-ctas { gap: 16px; align-items:center; }
+
+/* ================================
+   responsive polish
+   ================================ */
+@media (max-width: 480px) {
+  .hero-logo { width: 72px; }
+  .hero-title { font-size:28px; text-align:center; }
+  .hero-row { gap:16px; }
+}
