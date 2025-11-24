@@ -3,24 +3,36 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>SATYA AI — Verification Dashboard</title>
+  <title>TruthMate — Verification Dashboard</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
   <nav class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="SATYA AI" class="logo" />
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="TruthMate" class="logo" />
         <div class="brand-text">
-          <div class="title">SatyaAI</div>
+          <div class="title">TruthMate</div>
         </div>
       </div>
+
       <div class="navlinks">
-        <a href="#">How It Works</a>
-        <a href="#">Privacy</a>
-        <a href="#">Dashboard</a>
-        <a class="btn-outline" href="#">Try Demo</a>
-        <a class="btn-signin" href="#">Sign In</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/privacy">Privacy</a>
+
+        {% if current_user.is_authenticated %}
+          <a href="/dashboard">Dashboard</a>
+
+          <form action="{{ url_for('logout') }}" method="POST" style="display:inline;">
+            <button class="btn-signin" type="submit" style="background:none;border:none;color:#00e6d1;cursor:pointer;">
+              Logout
+            </button>
+          </form>
+
+        {% else %}
+          <a class="btn-outline" href="/try-demo">Try Demo</a>
+          <a class="btn-signin" href="/login">Login</a>
+        {% endif %}
       </div>
     </div>
   </nav>
@@ -39,7 +51,7 @@
   </main>
 
   <footer class="footer">
-    SATYA AI — Blue & White
+    TruthMate — Blue & White
   </footer>
 </body>
 </html>

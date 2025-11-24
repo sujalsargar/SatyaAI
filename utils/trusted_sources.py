@@ -1,4 +1,3 @@
-# satya ai/flask_app/utils/trusted_sources.py
 import json, time
 from urllib.parse import quote_plus
 import requests
@@ -16,12 +15,12 @@ def _cache_get(key):
         try:
             db.session.delete(entry)
             db.session.commit()
-        except Exception:
+        except:
             db.session.rollback()
         return None
     try:
         return json.loads(entry.value)
-    except Exception:
+    except:
         return None
 
 def _cache_set(key, value):
@@ -35,30 +34,123 @@ def _cache_set(key, value):
         db.session.add(entry)
     try:
         db.session.commit()
-    except Exception:
+    except:
         db.session.rollback()
 
-def wiki_summary(query):
-    key = f"wiki:{query}"
+
+# ✅ GOOGLE NEWS
+def google_news(query):
+    key = f"gnews:{query}"
     cached = _cache_get(key)
     if cached:
         return cached
     try:
-        q = quote_plus(" ".join(query.split()[:20]))
-        url = f"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro&explaintext&redirects=1&titles={q}"
-        r = requests.get(url, timeout=8)
-        j = r.json()
-        pages = j.get("query", {}).get("pages", {})
-        if pages:
-            pid = next(iter(pages))
-            extract = pages[pid].get("extract", "")
-            res = {"name": "Wikipedia", "url": f"https://en.wikipedia.org/?curid={pid}", "snippet": extract[:1200]}
+        url = f"https://news.google.com/search?q={quote_plus(query)}&hl=en-IN&gl=IN&ceid=IN:en"
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
+        soup = BeautifulSoup(r.text, "html.parser")
+        first = soup.select_one("article a")
+        if first:
+            title = first.get_text(strip=True)[:200]
+            href = "https://news.google.com" + first['href'][1:]
+            res = {"name":"Google News", "url": href, "snippet": title}
             _cache_set(key, res)
             return res
-    except Exception:
+    except:
         pass
     return None
 
+
+# ✅ ALT NEWS INDIA
+def altnews_search(query):
+    key = f"altnews:{query}"
+    cached = _cache_get(key)
+    if cached:
+        return cached
+    try:
+        url = f"https://www.altnews.in/?s={quote_plus(query)}"
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
+        soup = BeautifulSoup(r.text, "html.parser")
+        first = soup.select_one(".td-module-title a")
+        if first:
+            title = first.get_text(strip=True)[:200]
+            href = first['href']
+            res = {"name":"AltNews (India Fact Check)", "url": href, "snippet": title}
+            _cache_set(key, res)
+            return res
+    except:
+        pass
+    return None
+
+
+# ✅ BOOMLIVE INDIA
+def boomlive_search(query):
+    key = f"boom:{query}"
+    cached = _cache_get(key)
+    if cached:
+        return cached
+    try:
+        url = f"https://www.boomlive.in/search?q={quote_plus(query)}"
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
+        soup = BeautifulSoup(r.text, "html.parser")
+        first = soup.select_one("a.card-title")
+        if first:
+            title = first.get_text(strip=True)[:200]
+            href = first['href']
+            if not href.startswith("http"):
+                href = "https://www.boomlive.in" + href
+            res = {"name":"BoomLive (India Fact Check)", "url": href, "snippet": title}
+            _cache_set(key, res)
+            return res
+    except:
+        pass
+    return None
+
+
+# ✅ REUTERS
+def reuters_search(query):
+    key = f"reuters:{query}"
+    cached = _cache_get(key)
+    if cached:
+        return cached
+    try:
+        url = f"https://www.reuters.com/site-search/?query={quote_plus(query)}"
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
+        soup = BeautifulSoup(r.text, "html.parser")
+        first = soup.select_one("a.search-result-title")
+        if first:
+            title = first.get_text(strip=True)[:200]
+            href = "https://www.reuters.com" + first['href']
+            res = {"name":"Reuters", "url": href, "snippet": title}
+            _cache_set(key, res)
+            return res
+    except:
+        pass
+    return None
+
+
+# ✅ BBC
+def bbc_search(query):
+    key = f"bbc:{query}"
+    cached = _cache_get(key)
+    if cached:
+        return cached
+    try:
+        url = f"https://www.bbc.co.uk/search?q={quote_plus(query)}"
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
+        soup = BeautifulSoup(r.text, "html.parser")
+        first = soup.select_one(".ssrcss-6arcww-PromoHeadline a")
+        if first:
+            title = first.get_text(strip=True)[:200]
+            href = first['href']
+            res = {"name":"BBC News", "url": href, "snippet": title}
+            _cache_set(key, res)
+            return res
+    except:
+        pass
+    return None
+
+
+# ✅ SNOPES
 def snopes_search(query):
     key = f"snopes:{query}"
     cached = _cache_get(key)
@@ -66,20 +158,21 @@ def snopes_search(query):
         return cached
     try:
         url = f"https://www.snopes.com/?s={quote_plus(query)}"
-        r = requests.get(url, timeout=8, headers={"User-Agent":"satya-bot"})
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
         soup = BeautifulSoup(r.text, "html.parser")
-        # find first result - site structure may change; best-effort
-        first = soup.select_one(".search-results .card a") or soup.select_one(".article a")
-        if first and first.get('href'):
+        first = soup.select_one(".search-results .card a")
+        if first:
             title = first.get_text(strip=True)[:200]
             href = first['href']
             res = {"name":"Snopes", "url": href, "snippet": title}
             _cache_set(key, res)
             return res
-    except Exception:
+    except:
         pass
     return None
 
+
+# ✅ FACTCHECK.org
 def factcheck_search(query):
     key = f"factcheck:{query}"
     cached = _cache_get(key)
@@ -87,19 +180,21 @@ def factcheck_search(query):
         return cached
     try:
         url = f"https://www.factcheck.org/?s={quote_plus(query)}"
-        r = requests.get(url, timeout=8, headers={"User-Agent":"satya-bot"})
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
         soup = BeautifulSoup(r.text, "html.parser")
         first = soup.select_one(".entry-title a")
-        if first and first.get('href'):
+        if first:
             title = first.get_text(strip=True)[:200]
             href = first['href']
             res = {"name":"FactCheck.org", "url": href, "snippet": title}
             _cache_set(key, res)
             return res
-    except Exception:
+    except:
         pass
     return None
 
+
+# ✅ POLITIFACT
 def politifact_search(query):
     key = f"politifact:{query}"
     cached = _cache_get(key)
@@ -107,10 +202,10 @@ def politifact_search(query):
         return cached
     try:
         url = f"https://www.politifact.com/search/?q={quote_plus(query)}"
-        r = requests.get(url, timeout=8, headers={"User-Agent":"satya-bot"})
+        r = requests.get(url, timeout=8, headers={"User-Agent":"Mozilla"})
         soup = BeautifulSoup(r.text, "html.parser")
         first = soup.select_one('.o-title a, .c-quote__title a')
-        if first and first.get('href'):
+        if first:
             title = first.get_text(strip=True)[:200]
             href = first['href']
             if not href.startswith("http"):
@@ -118,18 +213,21 @@ def politifact_search(query):
             res = {"name":"PolitiFact", "url": href, "snippet": title}
             _cache_set(key, res)
             return res
-    except Exception:
+    except:
         pass
     return None
 
+
+
 def collect_trusted_sources(query):
-    """
-    Returns dict with keys 'wiki','snopes','factcheck','politifact' with best-effort results (or None).
-    Results are cached for TTL in DB.
-    """
+
     return {
-        "wiki": wiki_summary(query),
+        "google_news": google_news(query),
+        "altnews": altnews_search(query),
+        "boom": boomlive_search(query),
+        "reuters": reuters_search(query),
+        "bbc": bbc_search(query),
         "snopes": snopes_search(query),
         "factcheck": factcheck_search(query),
-        "politifact": politifact_search(query)
+        "politifact": politifact_search(query),
     }
