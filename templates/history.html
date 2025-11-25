@@ -1,27 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
 <h1 class="hero-title">Your History</h1>
+
 <div class="panel card">
   {% if checks %}
     <table class="checks-table">
-      <thead><tr><th>Date</th><th>Type</th><th>Snippet</th><th>Result</th><th>Action</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Snippet</th>
+          <th>Result</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
       <tbody>
         {% for c in checks %}
           <tr>
             <td>{{ c.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
             <td>{{ c.input_type }}</td>
-            <td class="mono">{{ (c.text_snippet[:160] ~ ('...' if c.text_snippet|length > 160 else '')) }}</td>
+            <td class="mono">
+              {{ c.text_snippet[:160] }}{% if c.text_snippet|length > 160 %}...{% endif %}
+            </td>
+
             <td>
               {% set res = (c.result_json | loads) %}
-              {% if res.status == 'fake' %}<span class="pill pill-fake">FAKE</span>
-              {% elif res.status == 'true' %}<span class="pill pill-true">TRUE</span>
-              {% else %}<span class="pill pill-unknown">UNKNOWN</span>{% endif %}
+              {% if res.status == 'fake' %}
+                <span class="pill pill-fake">FAKE</span>
+              {% elif res.status == 'true' %}
+                <span class="pill pill-true">TRUE</span>
+              {% else %}
+                <span class="pill pill-unknown">UNKNOWN</span>
+              {% endif %}
             </td>
-            <td><a class="btn-outline small" href="{{ url_for('results') }}">View</a></td>
+
+            <!-- ✅ FIXED VIEW BUTTON -->
+            <td>
+              <a class="btn-outline small" href="{{ url_for('results', check_id=c.id) }}">
+                View
+              </a>
+            </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+
   {% else %}
     <p>No history yet — run an analysis first.</p>
   {% endif %}

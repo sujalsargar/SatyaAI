@@ -1,62 +1,136 @@
 {% extends "base.html" %}
 {% block content %}
-<section id="verify" style="padding:24px;">
-  <div class="panel">
-    <h2 style="margin:0 0 8px; color:var(--accent)">Verification Dashboard</h2>
-    <p class="muted" style="margin:0 0 16px;">Submit text, URL, image, audio or video for SATYA AI to analyze.</p>
 
-    <!-- tabs -->
-    <div class="tabs" role="tablist" style="margin-bottom:12px;">
-      <button data-type="text" class="tab active">Text</button>
-      <button data-type="url" class="tab">URL</button>
-      <button data-type="image" class="tab">Image</button>
-      <button data-type="video" class="tab">Video</button>
-      <button data-type="audio" class="tab">Audio</button>
+<section class="verify-section">
+
+  <div class="verify-card">
+
+    <h2 class="verify-title">Verification Dashboard</h2>
+    <p class="verify-sub">
+      Submit text, URL, image, audio, or video — TruthMate will analyze, verify, and detect misinformation.
+    </p>
+
+    <!-- Mode Tabs -->
+    <div class="verify-tabs" role="tablist">
+      <button data-type="text" class="vtab active">📝 Text</button>
+      <button data-type="url" class="vtab">🔗 URL</button>
+      <button data-type="image" class="vtab">🖼 Image</button>
+      <button data-type="video" class="vtab">🎥 Video</button>
+      <button data-type="audio" class="vtab">🎤 Audio</button>
     </div>
 
+    <!-- Verification Form -->
     <form id="analyze-form" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
       <input type="hidden" name="type" id="input-type" value="text" />
-      <div id="input-controls">
-        <textarea name="text" id="text-input" class="big-textarea" placeholder="Paste text or article content..."></textarea>
-        <input type="url" name="url" id="url-input" class="input" placeholder="Enter article URL" style="display:none; margin-top:8px;" />
-        <input type="file" name="file" id="file-input" accept="image/*,video/*,audio/*" style="display:none; margin-top:8px;" />
+
+      <!-- TEXT -->
+      <div id="text-box" class="input-wrapper fade-in">
+        <textarea
+          name="text"
+          class="verify-textarea"
+          placeholder="Paste claim, message, article, or social media content..."
+        ></textarea>
       </div>
 
-      <div class="actions" style="margin-top:16px;">
-        <button class="btn-verify" type="submit">✈ Verify Now</button>
+      <!-- URL -->
+      <div id="url-box" class="input-wrapper hidden">
+        <input
+          type="url"
+          name="url"
+          class="verify-input"
+          placeholder="Paste a website, news article, tweet, or YouTube link..."
+        />
       </div>
+
+      <!-- FILE UPLOAD -->
+      <div id="file-box" class="input-wrapper hidden file-upload">
+        <label class="file-label">Upload media file</label>
+
+        <!-- Hidden input -->
+        <input
+          type="file"
+          name="file"
+          id="file-input"
+          class="verify-file-input"
+          accept="image/*,video/*,audio/*"
+        />
+
+        <!-- Custom Button -->
+        <label for="file-input" class="file-picker-btn">📁 Choose File</label>
+
+        <!-- File Name -->
+        <span id="file-name" class="file-name">No file selected</span>
+      </div>
+
+      <button class="btn-verify verify-btn" type="submit">
+        ✅ Verify Now
+      </button>
     </form>
-  </div>
 
-  <div style="margin-top:18px;">
-    <a href="{{ url_for('history') }}" class="btn-outline">View history</a>
-    <a href="{{ url_for('privacy') }}" class="btn-outline">Privacy</a>
+    <!-- Bottom Links -->
+    <div class="verify-actions">
+      <a href="{{ url_for('history') }}" class="btn-outline small">📂 View history</a>
+      <a href="{{ url_for('privacy') }}" class="btn-outline small">🔒 Privacy</a>
+    </div>
+
   </div>
 </section>
 
 <script>
-  (function(){
-    const tabs = document.querySelectorAll('.tab');
-    const inputTypeEl = document.getElementById('input-type');
-    const textInput = document.getElementById('text-input');
-    const urlInput = document.getElementById('url-input');
-    const fileInput = document.getElementById('file-input');
+(function () {
+  const tabs = document.querySelectorAll(".vtab");
+  const inputType = document.getElementById("input-type");
 
-    function setTab(t){
-      tabs.forEach(tb=>tb.classList.remove('active'));
-      t.classList.add('active');
-      const typ = t.dataset.type;
-      inputTypeEl.value = typ;
-      textInput.style.display = typ==='text'? 'block' : 'none';
-      urlInput.style.display = typ==='url'? 'block' : 'none';
-      fileInput.style.display = (typ==='image' || typ==='video' || typ==='audio')? 'block' : 'none';
-      if(typ==='image') fileInput.accept='image/*';
-      if(typ==='video') fileInput.accept='video/*';
-      if(typ==='audio') fileInput.accept='audio/*';
-    }
+  const textBox = document.getElementById("text-box");
+  const urlBox = document.getElementById("url-box");
+  const fileBox = document.getElementById("file-box");
+  const fileInput = document.getElementById("file-input");
+  const fileName = document.getElementById("file-name");
 
-    tabs.forEach(t=>t.addEventListener('click', ()=>setTab(t)));
-    document.addEventListener('DOMContentLoaded', ()=> setTab(document.querySelector('.tab.active')));
-  })();
+  const wrappers = [textBox, urlBox, fileBox];
+
+  function switchMode(btn) {
+    tabs.forEach(t => t.classList.remove("active"));
+    btn.classList.add("active");
+
+    const selected = btn.dataset.type;
+    inputType.value = selected;
+
+    // Hide all with animation reset
+    wrappers.forEach(el => {
+      el.classList.add("hidden");
+      el.classList.remove("fade-in");
+    });
+
+    // Show selected + animate
+    let target;
+    if (selected === "text") target = textBox;
+    else if (selected === "url") target = urlBox;
+    else target = fileBox;
+
+    // Set accepted file types dynamically
+    if (selected === "image") fileInput.accept = "image/*";
+    if (selected === "video") fileInput.accept = "video/*";
+    if (selected === "audio") fileInput.accept = "audio/*";
+
+    setTimeout(() => {
+      target.classList.remove("hidden");
+      target.classList.add("fade-in");
+    }, 120);
+  }
+
+  tabs.forEach(btn =>
+    btn.addEventListener("click", () => switchMode(btn))
+  );
+
+  // Display selected filename
+  if (fileInput) {
+    fileInput.addEventListener("change", () => {
+      fileName.textContent =
+        fileInput.files.length ? fileInput.files[0].name : "No file selected";
+    });
+  }
+})();
 </script>
+
 {% endblock %}

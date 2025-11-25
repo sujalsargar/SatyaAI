@@ -1,52 +1,78 @@
 {% extends "base.html" %}
-{% block content %}
-<section class="hero">
-  <h1 class="hero-title">Analysis Result</h1>
+{% block title %}Analysis Result — TruthMate{% endblock %}
 
-  <div class="panel card">
-    <div class="result-row">
-      <div class="label">Status</div>
-      <div class="value">
-        {% if result.status == 'fake' %}
+{% block content %}
+<section class="verify-section">
+  <div class="verify-card animate-fadeup">
+
+    <!-- Title -->
+    <h1 class="verify-title" style="margin-bottom: 28px;">Analysis Result</h1>
+
+    <!-- STATUS -->
+    <div class="result-line">
+      <span class="label">Status</span>
+      <span class="value">
+        {% if result.status.lower() == 'fake' %}
           <span class="pill pill-fake">FAKE</span>
-        {% elif result.status == 'true' %}
+        {% elif result.status.lower() == 'true' %}
           <span class="pill pill-true">TRUE</span>
         {% else %}
           <span class="pill pill-unknown">UNKNOWN</span>
         {% endif %}
+      </span>
+    </div>
+
+    <!-- CONFIDENCE -->
+    <div class="result-line">
+      <span class="label">Confidence</span>
+      <span class="value">{{ result.confidence }}%</span>
+    </div>
+
+    <!-- RISK SCORE -->
+    <div class="result-line">
+      <span class="label">Risk Score</span>
+      <span class="value">{{ result.risk_score }}/100</span>
+    </div>
+
+    <!-- REASONING -->
+    {% if result.reasoning %}
+    <div class="result-block">
+      <h3 class="result-heading">Reasoning</h3>
+      <div class="reason-box">
+        {{ result.reasoning }}
       </div>
     </div>
+    {% endif %}
 
-    <div class="result-row">
-      <div class="label">Confidence</div>
-      <div class="value">{{ result.confidence }}%</div>
+    <!-- SOURCES -->
+    <div class="result-block" style="margin-top: 24px;">
+      <h3 class="result-heading">Sources</h3>
+
+      {% if result.sources and result.sources|length > 0 %}
+      <ul class="sources-list">
+        {% for s in result.sources %}
+          <li>
+            <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer">
+              {{ s.name or s.url }}
+            </a>
+            {% if s.snippet %}
+              <div class="snippet">{{ s.snippet }}</div>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="muted">No credible sources detected.</p>
+      {% endif %}
     </div>
 
-    <div class="result-row">
-      <div class="label">Risk score</div>
-      <div class="value">{{ result.risk_score }}/100</div>
+    <!-- Back to Verify CTA -->
+    <div style="margin-top: 38px; text-align:center;">
+      <a href="{{ url_for('verify') }}" class="btn-verify">
+        Analyze Another
+      </a>
     </div>
 
-    <div class="result-row">
-      <div class="label">Reasoning</div>
-      <div class="value"><pre class="reasoning">{{ result.reasoning }}</pre></div>
-    </div>
-
-    <div class="result-row">
-      <div class="label">Sources</div>
-      <div class="value">
-        <ul>
-          {% for s in result.sources %}
-            <li><a href="{{ s.url }}" target="_blank" rel="noreferrer">{{ s.name or s.url }}</a> — {{ s.snippet }}</li>
-          {% else %}
-            <li>No sources returned.</li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:20px;">
-    <a href="{{ url_for('home') }}" class="btn-verify">Analyze Another</a>
   </div>
 </section>
 {% endblock %}

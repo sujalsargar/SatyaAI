@@ -1,6 +1,5 @@
 /* ================================
    FULL styles.css — SATYA AI / TruthMate
-   (paste this entire file into static/css/styles.css)
    ================================ */
 
 /* ================================
@@ -10,9 +9,7 @@
   --bg:#071018;
   --panel:#0e1720;
   --muted:#6f8289;
-
-  /* ACCENT COLOR = headline color */
-  --accent:#17FFF2;     /* neon cyan */
+  --accent:#17FFF2;
   --cyan:#17FFF2;
 }
 
@@ -65,52 +62,40 @@ body{
 }
 
 /* ================================
-   BUTTONS — border matches accent
+   BUTTONS
    ================================ */
 .btn-outline, .btn-signin, .btn-primary, .btn-logout {
-  border:2px solid var(--accent) !important;
+  border:2px solid var(--accent);
   color:var(--accent);
   padding:10px 14px;
   border-radius:10px;
   background:transparent;
-  text-decoration:none !important;
   font-weight:600;
-  display:inline-block;
-  transition:transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s cubic-bezier(.2,.9,.2,1);
-  position:relative;
-  will-change:transform,box-shadow;
+  transition:.18s ease;
 }
-
 .btn-outline:hover,
 .btn-signin:hover,
 .btn-primary:hover,
 .btn-logout:hover{
   background:rgba(23,255,242,0.08);
   color:white;
-  transform:translateY(-2px);
-  box-shadow:0 10px 30px rgba(23,255,242,0.1);
+  transform:translateY(-3px);
+  box-shadow:0 8px 22px rgba(23,255,242,0.15);
 }
 
-/* Verify button special (primary) */
+/* Primary CTA — Verify button */
 .btn-verify{
   background:var(--accent);
   color:#051617;
   border-radius:10px;
   padding:14px 18px;
   font-weight:800;
-  text-decoration:none;
-  display:inline-block;
-  transition:transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s cubic-bezier(.2,.9,.2,1);
-  box-shadow:
-    0 6px 12px rgba(2,8,14,0.45),
-    0 18px 45px rgba(23,255,242,0.06);
+  transition:.18s ease;
+  box-shadow:0 4px 10px rgba(23,255,242,0.12);
 }
 .btn-verify:hover{
-  box-shadow:
-    0 26px 48px rgba(2,8,14,0.6),
-    0 48px 120px rgba(23,255,242,0.12),
-    0 6px 0 rgba(0,0,0,0.2) inset;
-  transform: translateY(-10px) rotateX(1.2deg) scale(1.03);
+  transform:translateY(-4px) scale(1.015);
+  box-shadow:0 14px 32px rgba(23,255,242,0.15);
 }
 
 /* ================================
@@ -129,47 +114,35 @@ body{
 .hero-ctas{
   margin-top:22px;
   display:flex;
-  gap:14px;            /* spacing improved */
+  gap:16px;
   flex-wrap:wrap;
 }
 
-/* ================================
-   HERO: logo beside headline
-   ================================ */
 .hero-headline-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
 }
 
 .hero-logo {
-  width: 96px;
-  height: auto;
-  border-radius: 12px;
-  object-fit: contain;
-  border: 3px solid var(--accent);
-  box-shadow: 0 10px 30px rgba(23,255,242,0.08);
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-  padding: 6px;
+  width:96px;
+  border-radius:12px;
+  object-fit:contain;
+  border:3px solid var(--accent);
+  box-shadow:0 10px 30px rgba(23,255,242,0.08);
+  padding:6px;
 }
 
-/* ensure the hero text remains left-aligned next to the logo */
-.hero-text { min-width: 240px; }
+.hero-text { min-width:240px; }
 
-/* responsive: smaller screens stack vertically */
-@media (max-width: 720px) {
-  .hero-headline-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .hero-text { min-width: unset; }
-  .hero-logo { width: 84px; }
+@media (max-width:720px) {
+  .hero-headline-row { flex-direction:column; text-align:center; }
+  .hero-logo { width:84px; }
 }
 
 /* ================================
-   FEATURE CARDS (2×2 GRID)
+   FEATURE CARDS
    ================================ */
 .landing-features-grid{
   display:grid;
@@ -187,8 +160,7 @@ body{
   border-radius:12px;
   border:2px solid var(--accent);
   box-shadow:0 8px 30px rgba(2,8,14,0.5);
-  transition:0.2s ease;
-  position:relative;
+  transition:.2s ease;
 }
 .how-card:hover{
   transform:translateY(-4px);
@@ -201,15 +173,20 @@ body{
   margin-bottom:6px;
 }
 
-/* ================================
-   MODERN LOGIN / SIGNUP INPUTS
-   ================================ */
-.auth-wrap{ display:flex; justify-content:center; padding:30px 0; }
+/* =====================================================
+   ✅ UPDATED AUTH / LOGIN UI — Clean, Iconic, Modern
+   ===================================================== */
+.auth-wrap{
+  display:flex;
+  justify-content:center;
+  padding:60px 18px;
+}
+
 .auth-card{
   background:var(--panel);
-  padding:28px;
-  border-radius:14px;
-  box-shadow:0 12px 40px rgba(0,0,0,0.4);
+  padding:36px;
+  border-radius:16px;
+  box-shadow:0 18px 48px rgba(0,0,0,0.45);
   border:1px solid rgba(255,255,255,0.05);
   width:420px;
   margin:auto;
@@ -218,104 +195,93 @@ body{
 .auth-card h2{
   color:var(--accent);
   font-weight:800;
-  margin-bottom:12px;
+  margin-bottom:6px;
 }
 
-.auth-form label{
-  color:var(--muted);
-  font-size:14px;
-}
-
-/* field container for floating label + icon */
+/* field wrapper */
 .field{
   position:relative;
   display:block;
-  margin-top:12px;
+  margin-top:18px;
 }
 
-/* icon on left */
+/* icons inside input */
 .field-icon{
   position:absolute;
-  left:12px;
+  left:14px;
   top:50%;
   transform:translateY(-50%);
   pointer-events:none;
-  opacity:0.95;
-  font-size:16px;
+  opacity:0.9;
+  font-size:18px;
 }
 
 /* input base */
 .auth-form input{
   width:100%;
-  padding:14px 14px 14px 44px; /* space for icon */
-  margin-top:6px;
+  padding:16px 46px;
   background:#07131a;
-  border:2px solid rgba(255,255,255,0.06);
-  border-radius:10px;
+  border:2px solid rgba(255,255,255,0.07);
+  border-radius:12px;
   color:white;
-  transition:0.18s ease;
   font-size:15px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  transition:.18s ease;
 }
 
-/* placeholder blank so floating label works visually */
-.auth-form input::placeholder { color: transparent; }
-
-/* floating label */
+/* Floating label */
 .floating-label{
   position:absolute;
-  left:44px;
+  left:46px;
   top:50%;
   transform:translateY(-50%);
-  transition: all .18s ease;
-  color:rgba(255,255,255,0.6);
+  transition:.18s ease;
+  color:var(--muted);
   pointer-events:none;
-  font-size:14px;
+  font-size:15px;
 }
 
-/* when input has focus or value, reduce label and move it up */
-.field input:focus + .floating-label,
-.field input:not(:placeholder-shown) + .floating-label {
-  top:-10px;
-  left:12px;
-  transform:none;
-  font-size:12px;
-  color:var(--accent);
-  background:transparent;
-  padding:0 6px;
-}
-
-/* focus style for input */
 .auth-form input:focus{
   border-color:var(--accent);
   box-shadow:0 0 12px rgba(23,255,242,0.25);
   outline:none;
-  transform:scale(1.01);
 }
 
-/* small helper row under inputs */
-.auth-row{
-  margin-top:14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+/* when typing or focused */
+.field input:focus + .floating-label,
+.field input:not(:placeholder-shown) + .floating-label {
+  top:-8px;
+  left:10px;
+  font-size:12px;
+  color:var(--accent);
 }
 
-/* checkbox inline */
-.checkbox-inline{
-  display:flex;
-  align-items:center;
-  gap:8px;
+/* Password toggle eye */
+.pw-toggle-btn{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:18px;
   color:var(--muted);
-  font-size:14px;
+  padding:0;
 }
-.checkbox-inline input{ transform:scale(1.05); }
 
-/* subtle link style */
-.auth-card a{ color:var(--accent); text-decoration:underline; }
+.pw-toggle-btn:hover{
+  color:var(--accent);
+  transform:translateY(-50%) scale(1.18);
+}
 
-/* FLASH */
+.auth-card a{
+  color:var(--accent);
+  text-decoration:underline;
+}
+
+/* ================================
+   FLASH MESSAGES
+   ================================ */
 .flash-item{
   background:rgba(23,255,242,0.08);
   padding:10px 12px;
@@ -324,63 +290,163 @@ body{
   margin-bottom:10px;
 }
 
-/* ================================
-   3D BUTTON: hover/active/accessibility
-   ================================ */
-.btn-outline, .btn-signin, .btn-primary, .btn-verify, .btn-logout {
-  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s cubic-bezier(.2,.9,.2,1);
-  transform-origin: center;
-  position: relative;
-  will-change: transform, box-shadow;
+/* ==========================================================
+   ✅ VERIFY PAGE — Modern, Animated, Clean UI
+   ========================================================== */
+.verify-section {
+  display:flex;
+  justify-content:center;
+  padding:60px 18px;
 }
 
-/* default subtle shadow */
-.btn-outline, .btn-signin, .btn-primary {
-  box-shadow:
-    0 2px 0 rgba(0,0,0,0.2),
-    0 6px 18px rgba(2,8,14,0.35);
+.verify-card {
+  width:100%;
+  max-width:760px;
+  background:var(--panel);
+  padding:40px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 18px 48px rgba(0,0,0,0.48);
 }
 
-/* HOVER: lift + layered glowy shadows for 3D feel */
-.btn-outline:hover, .btn-signin:hover, .btn-primary:hover {
-  transform: translateY(-8px) rotateX(1deg) scale(1.02);
-  box-shadow:
-    0 14px 30px rgba(2,8,14,0.45),
-    0 32px 80px rgba(23,255,242,0.08),
-    0 4px 0 rgba(0,0,0,0.2) inset;
+.verify-title {
+  font-size:32px;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:8px;
 }
 
-/* stronger hover for primary/verify */
-.btn-verify:hover {
-  transform: translateY(-10px) rotateX(1.2deg) scale(1.03);
-  box-shadow:
-    0 26px 48px rgba(2,8,14,0.6),
-    0 48px 120px rgba(23,255,242,0.12),
-    0 6px 0 rgba(0,0,0,0.2) inset;
+.verify-sub {
+  color:var(--muted);
+  margin-bottom:26px;
+  font-size:16px;
 }
 
-/* ACTIVE (press) — reverse the lift to show press */
-.btn-outline:active, .btn-signin:active, .btn-primary:active, .btn-verify:active {
-  transform: translateY(-2px) scale(0.995);
-  box-shadow:
-    0 6px 10px rgba(2,8,14,0.5),
-    0 12px 30px rgba(23,255,242,0.04);
+/* Tabs */
+.verify-tabs {
+  display:flex;
+  gap:10px;
+  margin-bottom:24px;
+  flex-wrap:wrap;
 }
 
-/* focus-visible accessibility */
-.btn-outline:focus-visible, .btn-verify:focus-visible, .btn-signin:focus-visible {
-  outline:3px solid rgba(23,255,242,0.12);
-  outline-offset: 4px;
+.vtab {
+  padding:9px 22px;
+  border:2px solid var(--accent);
+  background:transparent;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+  color:var(--accent);
+  transition:.18s ease;
 }
 
-/* small tweak for spacing between CTAs (hero) */
-.hero-ctas { gap: 16px; align-items:center; }
+.vtab.active,
+.vtab:hover {
+  background:var(--accent);
+  color:#051617;
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(23,255,242,0.15);
+}
 
-/* ================================
-   responsive polish
-   ================================ */
-@media (max-width: 480px) {
-  .hero-logo { width: 72px; }
-  .hero-title { font-size:28px; text-align:center; }
-  .hero-row { gap:16px; }
+/* Fade animation */
+.input-wrapper {
+  opacity:1;
+  transform:translateY(0);
+  transition:opacity .25s ease, transform .25s ease;
+}
+.hidden.input-wrapper {
+  opacity:0;
+  transform:translateY(6px);
+  pointer-events:none;
+}
+
+/* Inputs */
+.verify-textarea,
+.verify-input {
+  width:100%;
+  background:#07131a;
+  color:white;
+  border:2px solid rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:16px;
+  font-size:15px;
+  margin-bottom:18px;
+  transition:.18s ease;
+}
+
+.verify-textarea {
+  min-height:130px;
+  resize:vertical;
+}
+
+.verify-textarea:focus,
+.verify-input:focus {
+  border-color:var(--accent);
+  box-shadow:0 0 12px rgba(23,255,242,0.25);
+  outline:none;
+}
+
+/* File Upload */
+.file-upload {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.verify-file-input {
+  display:none;
+}
+
+.file-picker-btn {
+  background:var(--accent);
+  color:#041010;
+  padding:12px 18px;
+  font-weight:700;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.18s ease;
+  border:none;
+}
+
+.file-picker-btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 10px 28px rgba(23,255,242,0.22);
+}
+
+.file-name {
+  color:var(--muted);
+  font-size:15px;
+  max-width:320px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* Footer buttons */
+.verify-actions {
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:24px;
+}
+
+.small {
+  font-size:14px;
+  padding:8px 14px;
+}
+
+/* Utility */
+.hidden {
+  display:none !important;
+}
+
+/* Responsive */
+@media(max-width:480px){
+  .verify-card { padding:28px; }
+  .verify-title { font-size:26px; text-align:center; }
+  .verify-sub { text-align:center; }
+  .verify-tabs { justify-content:center; }
+  .file-upload { flex-direction:column; align-items:flex-start; }
 }
