@@ -6,10 +6,17 @@
    GLOBAL THEME & COLORS
    ================================ */
 :root {
-  --bg:#071018;
+  --bg:#05060a;
+  --bg-elevated:#0b0d13;
   --panel:#0e1720;
   --muted:#6f8289;
+  --muted-soft:rgba(255,255,255,0.6);
   --accent:#FF9900;
+  --accent-soft:rgba(255,153,0,0.14);
+  --accent-soft-strong:rgba(255,153,0,0.22);
+  --text-primary:#f5f5f7;
+  --text-secondary:rgba(255,255,255,0.7);
+  --border-subtle:rgba(255,255,255,0.06);
   --cyan:#FF9900;
 }
 
@@ -17,18 +24,249 @@
 *{ box-sizing:border-box; }
 body{
   margin:0;
-  font-family:Inter,Segoe UI,Roboto,Helvetica,Arial;
-  background:linear-gradient(180deg,#080e12,#071018);
-  color:#e6f7f6;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  /* Base dark gradient */
+  background: linear-gradient(180deg, #06080d 0%, #05060a 50%, #040508 100%);
+  background-attachment: fixed;
+  color:var(--text-primary);
+  opacity:0;
+  animation:pageFadeIn 600ms ease-out forwards;
+  position:relative;
+  overflow-x: hidden;
+}
+
+/* ================================
+   PROFESSIONAL AI BACKGROUND SYSTEM
+   Multi-layered: Neural Network + Data Flow + Glows
+   ================================ */
+
+/* Layer 1: Abstract Neural Network Pattern (SVG-based) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    /* Neural Network Nodes & Connections */
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" opacity="0.12"><defs><linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.4" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.1" /></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g stroke="url(%23orangeGrad)" stroke-width="1.5" fill="none" opacity="0.6"><path d="M 200 300 Q 400 200 600 300 T 1000 300" filter="url(%23glow)"/><path d="M 300 500 Q 500 400 700 500 T 1100 500" filter="url(%23glow)"/><path d="M 400 700 Q 600 600 800 700 T 1200 700" filter="url(%23glow)"/><path d="M 1200 300 Q 1400 200 1600 300" filter="url(%23glow)"/><path d="M 1300 500 Q 1500 400 1700 500" filter="url(%23glow)"/></g><g fill="url(%23orangeGrad)" opacity="0.8"><circle cx="200" cy="300" r="4" filter="url(%23glow)"/><circle cx="600" cy="300" r="5" filter="url(%23glow)"/><circle cx="1000" cy="300" r="4" filter="url(%23glow)"/><circle cx="300" cy="500" r="4" filter="url(%23glow)"/><circle cx="700" cy="500" r="5" filter="url(%23glow)"/><circle cx="1100" cy="500" r="4" filter="url(%23glow)"/><circle cx="400" cy="700" r="4" filter="url(%23glow)"/><circle cx="800" cy="700" r="5" filter="url(%23glow)"/><circle cx="1200" cy="700" r="4" filter="url(%23glow)"/><circle cx="1200" cy="300" r="5" filter="url(%23glow)"/><circle cx="1600" cy="300" r="4" filter="url(%23glow)"/><circle cx="1300" cy="500" r="4" filter="url(%23glow)"/><circle cx="1700" cy="500" r="5" filter="url(%23glow)"/></g></svg>'),
+    /* Data Flow Streams */
+    linear-gradient(45deg, transparent 30%, rgba(255,153,0,0.03) 50%, transparent 70%),
+    linear-gradient(-45deg, transparent 30%, rgba(255,153,0,0.02) 50%, transparent 70%),
+    /* Subtle Grid Pattern */
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,153,0,0.02) 2px, rgba(255,153,0,0.02) 4px),
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,153,0,0.02) 2px, rgba(255,153,0,0.02) 4px);
+  background-size: 
+    100% 100%,
+    200% 200%,
+    200% 200%,
+    80px 80px,
+    80px 80px;
+  background-position: 
+    center center,
+    0% 0%,
+    100% 100%,
+    0 0,
+    0 0;
+  animation: 
+    neuralNetworkFloat 25s ease-in-out infinite,
+    dataFlowMove 15s linear infinite,
+    gridShift 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* Layer 2: Animated Data Particles & Glows */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    /* Floating Data Particles */
+    radial-gradient(3px 3px at 15% 25%, rgba(255,153,0,0.25), transparent),
+    radial-gradient(2px 2px at 45% 35%, rgba(255,153,0,0.2), transparent),
+    radial-gradient(4px 4px at 75% 45%, rgba(255,153,0,0.3), transparent),
+    radial-gradient(2px 2px at 25% 65%, rgba(255,153,0,0.2), transparent),
+    radial-gradient(3px 3px at 65% 75%, rgba(255,153,0,0.25), transparent),
+    radial-gradient(2px 2px at 85% 15%, rgba(255,153,0,0.2), transparent),
+    /* Orange Glow Accents */
+    radial-gradient(150px 150px at 20% 30%, rgba(255,153,0,0.08), transparent),
+    radial-gradient(200px 200px at 80% 70%, rgba(255,153,0,0.06), transparent),
+    radial-gradient(120px 120px at 50% 50%, rgba(255,153,0,0.05), transparent),
+    /* Blue Accent Glows (subtle contrast) */
+    radial-gradient(100px 100px at 10% 80%, rgba(0,150,255,0.04), transparent),
+    radial-gradient(150px 150px at 90% 20%, rgba(0,150,255,0.03), transparent);
+  background-size: 
+    200% 200%, 180% 180%, 160% 160%, 190% 190%, 170% 170%, 200% 200%,
+    100% 100%, 100% 100%, 100% 100%,
+    100% 100%, 100% 100%;
+  background-position: 
+    0% 0%, 100% 100%, 50% 50%, 0% 100%, 100% 0%, 50% 0%,
+    0% 0%, 100% 100%, 50% 50%,
+    0% 100%, 100% 0%;
+  animation: 
+    particleFloat 20s ease-in-out infinite,
+    glowPulse 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+/* Layer 3: Dark Overlay for Text Readability */
+body {
+  position: relative;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark overlay pseudo-element on main content area */
+main.container.main::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: 
+    radial-gradient(ellipse at center, transparent 0%, rgba(5,6,10,0.4) 50%, rgba(5,6,10,0.7) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Animations */
+@keyframes neuralNetworkFloat {
+  0%, 100% {
+    background-position: 
+      center center,
+      0% 0%,
+      100% 100%,
+      0 0,
+      0 0;
+    opacity: 0.12;
+  }
+  50% {
+    background-position: 
+      center center,
+      5% 5%,
+      95% 95%,
+      10px 10px,
+      -10px -10px;
+    opacity: 0.15;
+  }
+}
+
+@keyframes dataFlowMove {
+  0% {
+    background-position: 
+      center center,
+      0% 0%,
+      100% 100%,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position: 
+      center center,
+      100% 100%,
+      0% 0%,
+      80px 80px,
+      -80px -80px;
+  }
+}
+
+@keyframes gridShift {
+  0% {
+    background-position: 
+      center center,
+      0% 0%,
+      100% 100%,
+      0 0,
+      0 0;
+  }
+  100% {
+    background-position: 
+      center center,
+      0% 0%,
+      100% 100%,
+      80px 80px,
+      80px 80px;
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    background-position: 
+      0% 0%, 100% 100%, 50% 50%, 0% 100%, 100% 0%, 50% 0%,
+      0% 0%, 100% 100%, 50% 50%,
+      0% 100%, 100% 0%;
+  }
+  50% {
+    background-position: 
+      100% 100%, 0% 0%, 50% 50%, 100% 0%, 0% 100%, 50% 100%,
+      5% 5%, 95% 95%, 50% 50%,
+      5% 95%, 95% 5%;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+/* Ensure content is above background */
+main, section, .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Additional text readability enhancement */
+main.container.main,
+section,
+.container {
+  background: rgba(5,6,10,0.3);
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+}
+
+@keyframes pageFadeIn{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 /* ================================
    TOPBAR
    ================================ */
 .topbar{
-  background:transparent;
-  padding:18px 0;
-  border-bottom:1px solid rgba(255,255,255,0.02);
+  background:rgba(5,6,10,0.9);
+  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 .topbar-inner{
   max-width:1100px;
@@ -53,63 +291,140 @@ body{
   color:var(--accent);
   font-weight:700;
   font-size:20px;
+  letter-spacing:0.02em;
 }
 
 .navlinks a{
-  color:rgba(255,255,255,0.7);
+  color:var(--text-secondary);
   margin-left:16px;
   text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  position:relative;
+  padding-bottom:4px;
+}
+.navlinks a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:2px;
+  background:var(--accent);
+  border-radius:999px;
+  transition:width 220ms cubic-bezier(0.19,1,0.22,1);
+}
+.navlinks a:hover::after{
+  width:100%;
 }
 
 /* ================================
    BUTTONS
    ================================ */
 .btn-outline, .btn-signin, .btn-primary, .btn-logout {
-  border:2px solid var(--accent);
+  border:1px solid var(--accent);
   color:var(--accent);
-  padding:10px 14px;
-  border-radius:10px;
+  padding:9px 16px;
+  border-radius:999px;
   background:transparent;
   font-weight:600;
-  transition:.18s ease;
+  font-size:13px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:
+    background-color 220ms ease-out,
+    color 220ms ease-out,
+    transform 220ms ease-out,
+    box-shadow 220ms ease-out,
+    border-color 220ms ease-out;
 }
 .btn-outline:hover,
 .btn-signin:hover,
-.btn-primary:hover,
 .btn-logout:hover{
-  background:rgba(255,153,0,0.08);
-  color:white;
-  transform:translateY(-3px);
-  box-shadow:0 8px 22px rgba(255,153,0,0.15);
+  background:var(--accent-soft);
+  color:#ffffff;
+  transform:translateY(-2px);
+  box-shadow:0 10px 26px rgba(0,0,0,0.6);
+  border-color:var(--accent);
+}
+
+/* Primary button with elevated, smooth hover */
+.btn-primary{
+  background-color:var(--accent);
+  color:#0b0b0f;
+  border-color:var(--accent);
+  box-shadow:0 8px 18px rgba(0,0,0,0.55);
+  transform:translateY(0);
+  transition:
+    background-color 260ms cubic-bezier(0.16,0.84,0.44,1),
+    box-shadow 260ms cubic-bezier(0.16,0.84,0.44,1),
+    transform 260ms cubic-bezier(0.16,0.84,0.44,1);
+}
+.btn-primary:hover,
+.btn-primary:focus-visible{
+  background-color:#ffae33;
+  transform:translateY(-2px);
+  box-shadow:
+    0 14px 26px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(255,153,0,0.7),
+    0 0 18px rgba(255,153,0,0.8);
+}
+.btn-primary:active{
+  transform:translateY(0);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,153,0,0.6);
 }
 
 /* Primary CTA — Verify button */
 .btn-verify{
   background:var(--accent);
   color:#000000;
-  border-radius:10px;
-  padding:14px 18px;
-  font-weight:800;
-  transition:.18s ease;
-  box-shadow:0 4px 10px rgba(23,255,242,0.12);
+  border-radius:999px;
+  padding:13px 24px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  transition:
+    background-color 260ms cubic-bezier(0.16,0.84,0.44,1),
+    box-shadow 260ms cubic-bezier(0.16,0.84,0.44,1),
+    transform 260ms cubic-bezier(0.16,0.84,0.44,1);
+  box-shadow:0 8px 20px rgba(0,0,0,0.6);
 }
 .btn-verify:hover{
-  transform:translateY(-4px) scale(1.015);
-  box-shadow:0 14px 32px rgba(255,153,0,0.15);
+  transform:translateY(-3px);
+  box-shadow:
+    0 18px 38px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(255,153,0,0.7),
+    0 0 22px rgba(255,153,0,0.7);
 }
 
 /* ================================
    HERO SECTION
    ================================ */
-.container{ max-width:1080px; margin:24px auto; padding:0 18px; }
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:72px 22px 56px;
+}
 .hero-row{ display:flex; gap:36px; align-items:center; flex-wrap:wrap; }
 .hero-title{
   font-size:44px;
   margin:6px 0;
   color:var(--accent);
   font-weight:800;
+  opacity:0;
+  transform:translateY(12px);
+  animation:heroSlideUp 600ms cubic-bezier(0.16,0.84,0.44,1) 120ms forwards;
 }
-.hero-sub{ color:var(--muted); margin-top:8px; }
+.hero-sub{
+  color:var(--muted);
+  margin-top:8px;
+  opacity:0;
+  transform:translateY(10px);
+  animation:heroSlideUp 600ms cubic-bezier(0.16,0.84,0.44,1) 220ms forwards;
+}
 
 .hero-ctas{
   margin-top:22px;
@@ -136,6 +451,17 @@ body{
 
 .hero-text { min-width:240px; }
 
+@keyframes heroSlideUp{
+  from{
+    opacity:0;
+    transform:translateY(16px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
 @media (max-width:720px) {
   .hero-headline-row { flex-direction:column; text-align:center; }
   .hero-logo { width:84px; }
@@ -155,16 +481,70 @@ body{
 }
 
 .how-card{
-  background:var(--panel);
-  padding:18px;
-  border-radius:12px;
-  border:2px solid var(--accent);
-  box-shadow:0 8px 30px rgba(2,8,14,0.5);
-  transition:.2s ease;
+  background:
+    /* AI verification pattern */
+    radial-gradient(circle at top right, rgba(255,153,0,0.06), transparent 60%),
+    var(--bg-elevated);
+  padding:20px;
+  border-radius:16px;
+  border:1px solid var(--border-subtle);
+  box-shadow:0 18px 40px rgba(0,0,0,0.7);
+  transform:translateY(0);
+  position:relative;
+  overflow:hidden;
+  transition:
+    transform 350ms cubic-bezier(0.21,0.8,0.32,1),
+    box-shadow 350ms cubic-bezier(0.21,0.8,0.32,1),
+    border-color 350ms cubic-bezier(0.21,0.8,0.32,1),
+    background-color 350ms cubic-bezier(0.21,0.8,0.32,1);
 }
-.how-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 12px 40px rgba(255,153,0,0.1);
+
+/* Feature card icon glow effect */
+.how-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,153,0,0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 350ms ease-out;
+  pointer-events: none;
+}
+
+.how-card:hover::after {
+  opacity: 1;
+}
+.how-card:hover,
+.how-card:focus-within{
+  transform:translateY(-6px);
+  background-color:#151922;
+  border-color:#ffb84d;
+  box-shadow:
+    0 24px 55px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(255,153,0,0.5);
+}
+
+/* subtle floating glow for accent cards (optional: add .card-glow class) */
+.card-glow{
+  position:relative;
+  overflow:hidden;
+}
+.card-glow::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle at top,rgba(255,153,0,0.11),transparent 58%);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 400ms ease-out, transform 400ms ease-out;
+  transform:translateY(20px);
+}
+.card-glow:hover::before,
+.card-glow:focus-within::before{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .how-title{
@@ -180,16 +560,58 @@ body{
   display:flex;
   justify-content:center;
   padding:60px 18px;
+  position:relative;
+  background:
+    /* Verification checkmark pattern */
+    radial-gradient(circle at 20% 30%, rgba(255,153,0,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0,150,255,0.04) 0%, transparent 50%);
+  background-size: 100% 100%;
 }
 
 .auth-card{
-  background:var(--panel);
+  background:
+    /* Card verification pattern */
+    radial-gradient(circle at top left, rgba(255,153,0,0.06), transparent 60%),
+    var(--bg-elevated);
   padding:36px;
-  border-radius:16px;
-  box-shadow:0 18px 48px rgba(0,0,0,0.45);
-  border:1px solid rgba(255,255,255,0.05);
+  border-radius:18px;
+  box-shadow:0 22px 60px rgba(0,0,0,0.7);
+  border:1px solid var(--border-subtle);
   width:420px;
   margin:auto;
+  transform:translateY(0);
+  position:relative;
+  overflow:hidden;
+  transition:
+    transform 350ms cubic-bezier(0.21,0.8,0.32,1),
+    box-shadow 350ms cubic-bezier(0.21,0.8,0.32,1),
+    border-color 350ms cubic-bezier(0.21,0.8,0.32,1),
+    background-color 350ms cubic-bezier(0.21,0.8,0.32,1);
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,153,0,0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+  pointer-events: none;
+}
+
+.auth-card:hover::before {
+  opacity: 0.6;
+}
+.auth-card:hover,
+.auth-card:focus-within{
+  transform:translateY(-4px);
+  border-color:#ffb84d;
+  box-shadow:
+    0 26px 70px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(255,153,0,0.5);
 }
 
 .auth-card h2{
@@ -220,12 +642,17 @@ body{
 .auth-form input{
   width:100%;
   padding:16px 46px;
-  background:#07131a;
-  border:2px solid rgba(255,255,255,0.07);
+  background:#050910;
+  border:1px solid rgba(255,255,255,0.08);
   border-radius:12px;
   color:white;
   font-size:15px;
-  transition:.18s ease;
+  box-shadow:0 0 0 0 rgba(255,153,0,0);
+  transition:
+    border-color 180ms ease-out,
+    box-shadow 180ms ease-out,
+    background-color 180ms ease-out,
+    color 180ms ease-out;
 }
 
 /* Floating label */
@@ -234,16 +661,23 @@ body{
   left:46px;
   top:50%;
   transform:translateY(-50%);
-  transition:.18s ease;
   color:var(--muted);
   pointer-events:none;
   font-size:15px;
+  transition:
+    top 200ms cubic-bezier(0.19,1,0.22,1),
+    left 200ms cubic-bezier(0.19,1,0.22,1),
+    font-size 200ms cubic-bezier(0.19,1,0.22,1),
+    color 200ms cubic-bezier(0.19,1,0.22,1);
 }
 
 .auth-form input:focus{
   border-color:var(--accent);
-  box-shadow:0 0 12px rgba(23,255,242,0.25);
+  box-shadow:
+    0 0 0 1px rgba(255,153,0,0.9),
+    0 0 14px rgba(255,153,0,0.45);
   outline:none;
+  background-color:#080a10;
 }
 
 /* when typing or focused */
@@ -297,16 +731,54 @@ body{
   display:flex;
   justify-content:center;
   padding:60px 18px;
+  position:relative;
+  background:
+    /* AI Analysis Pattern */
+    radial-gradient(circle at 30% 20%, rgba(255,153,0,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(0,150,255,0.05) 0%, transparent 50%),
+    /* Verification grid pattern */
+    linear-gradient(90deg, transparent 0%, rgba(255,153,0,0.02) 50%, transparent 100%);
+  background-size: 100% 100%, 100% 100%, 200% 100%;
+  animation: verifyBgShift 15s ease-in-out infinite;
+}
+
+@keyframes verifyBgShift {
+  0%, 100% {
+    background-position: 0% 0%, 0% 0%, 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%, 100% 100%, 100% 0%;
+  }
 }
 
 .verify-card {
   width:100%;
   max-width:760px;
-  background:var(--panel);
+  background:
+    /* Verification card pattern */
+    radial-gradient(circle at bottom right, rgba(255,153,0,0.08), transparent 60%),
+    var(--panel);
   padding:40px;
   border-radius:18px;
   border:1px solid rgba(255,255,255,0.05);
   box-shadow:0 18px 48px rgba(0,0,0,0.48);
+  position:relative;
+  overflow:hidden;
+}
+
+.verify-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    /* Fact-check icon pattern */
+    radial-gradient(circle at 10% 20%, rgba(255,153,0,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(0,150,255,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .verify-title {
@@ -442,6 +914,200 @@ body{
   display:none !important;
 }
 
+/* ================================
+   IMAGE PLACEHOLDERS & HERO VISUALS
+   ================================ */
+
+/* Hero background image container - AI Neural Network Pattern */
+.hero-bg-visual {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  opacity: 0.25;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><defs><linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.5" /><stop offset="100%" style="stop-color:%230096FF;stop-opacity:0.3" /></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g fill="url(%23aiGrad)" opacity="0.7" filter="url(%23glow)"><circle cx="150" cy="150" r="6"/><circle cx="300" cy="120" r="5"/><circle cx="450" cy="180" r="6"/><circle cx="200" cy="300" r="5"/><circle cx="400" cy="320" r="6"/><circle cx="100" cy="400" r="5"/><circle cx="350" cy="450" r="6"/><circle cx="500" cy="350" r="5"/></g><g stroke="url(%23aiGrad)" stroke-width="2" fill="none" opacity="0.6" filter="url(%23glow)"><path d="M 150 150 L 300 120 L 450 180"/><path d="M 300 120 L 200 300 L 400 320"/><path d="M 150 150 L 200 300 L 100 400"/><path d="M 450 180 L 400 320 L 500 350"/><path d="M 200 300 L 350 450"/><path d="M 400 320 L 350 450"/></g><path d="M 50 500 Q 150 450 250 500 T 450 500" stroke="url(%23aiGrad)" stroke-width="2.5" fill="none" opacity="0.5" filter="url(%23glow)"/></svg>');
+  background-size: contain;
+  background-position: center right;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+  animation: heroVisualFloat 20s ease-in-out infinite;
+}
+
+@keyframes heroVisualFloat {
+  0%, 100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translateY(-10px);
+  }
+}
+
+/* Feature card image - Professional SVG Illustrations */
+.feature-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(255,153,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.feature-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255,153,0,0.2);
+}
+
+/* Feature 1: Multi-format - Document/Media Icons */
+.feature-image.format {
+  background: 
+    linear-gradient(135deg, rgba(255,153,0,0.15) 0%, rgba(0,150,255,0.08) 100%),
+    var(--bg-elevated);
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g fill="none" stroke="url(%23grad1)" stroke-width="2"><rect x="50" y="40" width="60" height="80" rx="4" opacity="0.8"/><rect x="130" y="50" width="50" height="70" rx="4" opacity="0.7"/><circle cx="250" cy="90" r="25" opacity="0.6"/><rect x="300" y="60" width="40" height="60" rx="4" opacity="0.7"/></g><path d="M 50 80 L 130 80 M 50 100 L 130 100" stroke="url(%23grad1)" stroke-width="1.5" opacity="0.5"/></svg>');
+}
+
+/* Feature 2: AI Reasoning - Neural Network Brain */
+.feature-image.reasoning {
+  background: 
+    linear-gradient(135deg, rgba(255,153,0,0.15) 0%, rgba(0,150,255,0.08) 100%),
+    var(--bg-elevated);
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g fill="url(%23grad2)" opacity="0.8"><circle cx="100" cy="80" r="8"/><circle cx="200" cy="60" r="6"/><circle cx="300" cy="90" r="7"/><circle cx="150" cy="130" r="6"/><circle cx="250" cy="140" r="8"/></g><g stroke="url(%23grad2)" stroke-width="2" fill="none" opacity="0.5"><path d="M 100 80 L 200 60 L 300 90"/><path d="M 200 60 L 150 130 L 250 140"/><path d="M 100 80 L 150 130"/><path d="M 300 90 L 250 140"/></g></svg>');
+}
+
+/* Feature 3: History - Dashboard/Chart */
+.feature-image.history {
+  background: 
+    linear-gradient(135deg, rgba(255,153,0,0.15) 0%, rgba(0,150,255,0.08) 100%),
+    var(--bg-elevated);
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g stroke="url(%23grad3)" stroke-width="2.5" fill="none" opacity="0.8"><path d="M 50 150 L 100 120 L 150 100 L 200 80 L 250 90 L 300 70 L 350 60" stroke-linecap="round"/></g><g fill="url(%23grad3)" opacity="0.7"><circle cx="50" cy="150" r="4"/><circle cx="100" cy="120" r="4"/><circle cx="150" cy="100" r="4"/><circle cx="200" cy="80" r="4"/><circle cx="250" cy="90" r="4"/><circle cx="300" cy="70" r="4"/><circle cx="350" cy="60" r="4"/></g><rect x="50" y="50" width="300" height="120" rx="4" fill="none" stroke="url(%23grad3)" stroke-width="1.5" opacity="0.3"/></svg>');
+}
+
+/* Feature 4: Security - Shield with Lock */
+.feature-image.security {
+  background: 
+    linear-gradient(135deg, rgba(255,153,0,0.15) 0%, rgba(0,150,255,0.08) 100%),
+    var(--bg-elevated);
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g fill="none" stroke="url(%23grad4)" stroke-width="2.5" opacity="0.8"><path d="M 200 40 L 150 60 L 150 100 Q 150 130 200 150 Q 250 130 250 100 L 250 60 Z" stroke-linejoin="round"/></g><g fill="url(%23grad4)" opacity="0.6"><circle cx="200" cy="100" r="20"/><rect x="190" y="90" width="20" height="25" rx="2"/></g><circle cx="200" cy="115" r="3" fill="url(%23grad4)" opacity="0.8"/></svg>');
+}
+
+/* How it works section background enhancement */
+.how-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.how-grid::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,153,0,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.how-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* How It Works Step Images */
+.how-step-image {
+  width: 100%;
+  height: 160px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(255,153,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.how-step-image.step-1 {
+  background: linear-gradient(135deg, rgba(255,153,0,0.12) 0%, rgba(0,150,255,0.06) 100%), var(--bg-elevated);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="step1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g fill="url(%23step1)" opacity="0.8"><rect x="80" y="60" width="80" height="100" rx="4"/><rect x="180" y="70" width="60" height="90" rx="4"/><circle cx="300" cy="110" r="30"/></g><path d="M 80 90 L 180 90 M 80 110 L 180 110 M 80 130 L 180 130" stroke="url(%23step1)" stroke-width="2" opacity="0.6"/></svg>');
+}
+
+.how-step-image.step-2 {
+  background: linear-gradient(135deg, rgba(255,153,0,0.12) 0%, rgba(0,150,255,0.06) 100%), var(--bg-elevated);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="step2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g stroke="url(%23step2)" stroke-width="2.5" fill="none" opacity="0.8"><path d="M 100 80 L 150 60 L 200 80 L 250 60 L 300 80" stroke-linecap="round"/></g><g fill="url(%23step2)" opacity="0.7"><circle cx="100" cy="80" r="5"/><circle cx="150" cy="60" r="5"/><circle cx="200" cy="80" r="5"/><circle cx="250" cy="60" r="5"/><circle cx="300" cy="80" r="5"/></g><rect x="100" y="120" width="200" height="50" rx="4" fill="url(%23step2)" opacity="0.3"/></svg>');
+}
+
+.how-step-image.step-3 {
+  background: linear-gradient(135deg, rgba(255,153,0,0.12) 0%, rgba(0,150,255,0.06) 100%), var(--bg-elevated);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="step3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g fill="url(%23step3)" opacity="0.7"><circle cx="100" cy="100" r="25"/><circle cx="200" cy="100" r="25"/><circle cx="300" cy="100" r="25"/></g><g stroke="url(%23step3)" stroke-width="2" fill="none" opacity="0.6"><path d="M 125 100 L 175 100"/><path d="M 225 100 L 275 100"/></g><path d="M 100 75 L 200 75 L 300 75" stroke="url(%23step3)" stroke-width="1.5" opacity="0.4"/></svg>');
+}
+
+.how-step-image.step-4 {
+  background: linear-gradient(135deg, rgba(255,153,0,0.12) 0%, rgba(0,150,255,0.06) 100%), var(--bg-elevated);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="step4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><g fill="url(%23step4)" opacity="0.8"><circle cx="150" cy="80" r="8"/><circle cx="200" cy="60" r="6"/><circle cx="250" cy="80" r="7"/><circle cx="175" cy="120" r="6"/><circle cx="225" cy="130" r="8"/></g><g stroke="url(%23step4)" stroke-width="2.5" fill="none" opacity="0.6"><path d="M 150 80 L 200 60 L 250 80"/><path d="M 200 60 L 175 120 L 225 130"/><path d="M 150 80 L 175 120"/><path d="M 250 80 L 225 130"/></g></svg>');
+}
+
+.how-step-image.step-5 {
+  background: linear-gradient(135deg, rgba(255,153,0,0.12) 0%, rgba(0,150,255,0.06) 100%), var(--bg-elevated);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="step5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><rect x="80" y="50" width="240" height="100" rx="6" fill="url(%23step5)" opacity="0.3" stroke="url(%23step5)" stroke-width="2"/><path d="M 100 80 L 140 80 M 100 100 L 160 100 M 100 120 L 150 120" stroke="url(%23step5)" stroke-width="2.5" opacity="0.7"/><circle cx="250" cy="100" r="20" fill="url(%23step5)" opacity="0.5"/><path d="M 240 100 L 250 110 L 260 90" stroke="%23FF9900" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+
+.how-step-image.step-6 {
+  background: linear-gradient(135deg, rgba(255,153,0,0.12) 0%, rgba(0,150,255,0.06) 100%), var(--bg-elevated);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><linearGradient id="step6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF9900;stop-opacity:0.7" /><stop offset="100%" style="stop-color:%23FF9900;stop-opacity:0.2" /></linearGradient></defs><rect x="100" y="60" width="200" height="80" rx="6" fill="url(%23step6)" opacity="0.2" stroke="url(%23step6)" stroke-width="2"/><path d="M 120 90 L 180 90 M 120 110 L 200 110" stroke="url(%23step6)" stroke-width="2" opacity="0.6"/><circle cx="250" cy="100" r="15" fill="url(%23step6)" opacity="0.5"/><path d="M 245 100 L 250 105 L 255 95" stroke="%23FF9900" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>');
+}
+
+/* ================================
+   OPTIONAL: REPLACE WITH ACTUAL IMAGE
+   ================================ */
+
+/*
+   To use an actual background image instead of CSS patterns:
+   
+   1. Add your image to: /static/images/ai-background.jpg
+   2. Uncomment and modify the body::before rule below
+   3. Comment out or remove the SVG-based pattern above
+   
+   Example:
+   
+   body::before {
+     content: "";
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-image: url('/static/images/ai-background.jpg');
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     opacity: 0.15;
+     filter: blur(0.5px) brightness(0.3) contrast(1.2);
+     pointer-events: none;
+     z-index: 0;
+   }
+   
+   Recommended image specs:
+   - Size: 1920x1080px or larger
+   - Format: JPG (smaller) or PNG (if transparency needed)
+   - Style: Dark, abstract, AI/tech theme
+   - Colors: Dark grays/blacks with orange (#FF9900) accents
+   - File size: < 500KB (optimize with TinyPNG)
+*/
+
 /* Responsive */
 @media(max-width:480px){
   .verify-card { padding:28px; }
@@ -449,4 +1115,16 @@ body{
   .verify-sub { text-align:center; }
   .verify-tabs { justify-content:center; }
   .file-upload { flex-direction:column; align-items:flex-start; }
+  .hero-bg-visual {
+    width: 100%;
+    height: 200px;
+    opacity: 0.1;
+  }
+  
+  /* Reduce background complexity on mobile for performance */
+  body::before,
+  body::after {
+    opacity: 0.5;
+    animation-duration: 30s, 20s, 25s;
+  }
 }

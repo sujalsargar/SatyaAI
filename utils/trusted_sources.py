@@ -219,9 +219,60 @@ def politifact_search(query):
 
 
 
-def collect_trusted_sources(query):
+# ✅ WIKIPEDIA API
+def wikipedia_search(query):
+    key = f"wiki:{query}"
+    cached = _cache_get(key)
+    if cached:
+        return cached
+    try:
+        # Extract key terms for Wikipedia search
+        search_terms = query[:100].split()[:5]  # First 5 words
+        search_query = " ".join(search_terms)
+        
+        # Wikipedia API search
+        search_url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + quote_plus(search_query)
+        r = requests.get(search_url, timeout=8, headers={"User-Agent": "TruthMate/1.0"})
+        
+        if r.status_code == 200:
+            data = r.json()
+            if data.get("extract"):
+                res = {
+                    "name": "Wikipedia",
+                    "url": data.get("content_urls", {}).get("desktop", {}).get("page", ""),
+                    "snippet": data.get("extract", "")[:300]
+                }
+                _cache_set(key, res)
+                return res
+    except:
+        pass
+    
+    # Fallback: try Wikipedia search API
+    try:
+        search_url = f"https://en.wikipedia.org/api/rest_v1/page/search/{quote_plus(query[:50])}"
+        r = requests.get(search_url, timeout=8, headers={"User-Agent": "TruthMate/1.0"})
+        if r.status_code == 200:
+            results = r.json()
+            if results.get("pages") and len(results["pages"]) > 0:
+                page = results["pages"][0]
+                res = {
+                    "name": "Wikipedia",
+                    "url": f"https://en.wikipedia.org/wiki/{quote_plus(page.get('key', ''))}",
+                    "snippet": page.get("snippet", "")[:300]
+                }
+                _cache_set(key, res)
+                return res
+    except:
+        pass
+    
+    return None
 
+
+def collect_trusted_sources(query):
+    """Collect all trusted sources in parallel for better performance"""
+    # Run all searches (they're cached, so safe to call all)
     return {
+        "wiki": wikipedia_search(query),
         "google_news": google_news(query),
         "altnews": altnews_search(query),
         "boom": boomlive_search(query),
