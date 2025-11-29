@@ -249,26 +249,55 @@ def analyze():
 
     try:
         trusted = collect_trusted_sources(extracted_text or url)
-    except:
+        print(f"[DEBUG] Collected {len(trusted)} source entries, {sum(1 for v in trusted.values() if v is not None)} non-None")
+    except Exception as e:
+        print(f"[ERROR] Failed to collect trusted sources: {str(e)}")
+        import traceback
+        traceback.print_exc()
         trusted = {}
 
     try:
         verdict = ask_llm_for_verdict(extracted_text or url, trusted or {})
-    except:
+        print(f"[DEBUG] Verdict sources count: {len(verdict.get('sources', []))}")
+    except Exception as e:
+        print(f"[ERROR] Failed to get verdict: {str(e)}")
+        import traceback
+        traceback.print_exc()
         verdict = {
             "status": "unknown",
             "confidence": 40,
-            "reasoning": "",
+            "reasoning": f"Error during analysis: {str(e)}",
             "sources": [],
             "risk_score": 50,
         }
 
     sources = verdict.get("sources") or []
+    print(f"[DEBUG] Initial sources from verdict: {len(sources)}")
+    
+    # If no sources from verdict, try to extract from trusted sources dict
     if not sources:
         if wiki_snip:
             sources = [wiki_snip]
+            print(f"[DEBUG] Using wiki_snip as source")
         else:
-            sources = list(trusted.values())
+            # Convert trusted dict to list, filtering out None values
+            sources = [v for v in trusted.values() if v is not None and v.get("snippet")]
+            print(f"[DEBUG] Extracted {len(sources)} sources from trusted dict")
+    
+    # Ensure all sources have required fields
+    formatted_sources = []
+    for src in sources:
+        if isinstance(src, dict):
+            # Ensure source has required fields
+            if src.get("name") or src.get("url"):
+                formatted_sources.append({
+                    "name": src.get("name", "Unknown Source"),
+                    "url": src.get("url", ""),
+                    "snippet": src.get("snippet", "")
+                })
+    
+    sources = formatted_sources
+    print(f"[DEBUG] Final formatted sources count: {len(sources)}")
 
     result = {
         "status": verdict.get("status", "unknown"),

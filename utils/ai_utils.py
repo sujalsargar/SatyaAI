@@ -2,8 +2,13 @@ import os
 import json
 import requests
 import re
+import logging
 from transformers import pipeline
 from utils.trusted_sources import collect_trusted_sources
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # ✅ Load OpenAI API key
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
@@ -57,6 +62,8 @@ def analyze_source_reliability(sources):
     total_score = 0
     count = 0
     
+    logger.info(f"Analyzing {len(sources)} source entries")
+    
     for key, source in sources.items():
         if source and source.get("snippet"):
             score = reliability_scores.get(key, 70)
@@ -68,8 +75,14 @@ def analyze_source_reliability(sources):
             })
             total_score += score
             count += 1
+            logger.info(f"Added source: {key} - {source.get('name', 'Unknown')}")
+        elif source:
+            logger.warning(f"Source {key} found but missing snippet: {source}")
+        else:
+            logger.debug(f"Source {key} is None")
     
     avg_reliability = total_score / count if count > 0 else 0
+    logger.info(f"Source analysis complete: {count} valid sources, avg reliability: {avg_reliability:.1f}%")
     return found_sources, avg_reliability, count
 
 
@@ -222,11 +235,18 @@ def ask_llm_for_verdict(text, collected):
             "risk_score": 50
         }
 
-    # ✅ Collect trusted sources
-    sources = collect_trusted_sources(text_query)
+    # ✅ Use provided sources or collect trusted sources
+    if collected and isinstance(collected, dict) and len(collected) > 0:
+        logger.info(f"Using provided sources dictionary with {len(collected)} entries")
+        sources = collected
+    else:
+        logger.info(f"Starting fact-check for query: {text_query[:100]}")
+        sources = collect_trusted_sources(text_query)
+        logger.info(f"Collected sources dictionary with {len(sources)} entries")
     
     # ✅ Analyze source reliability
     found_sources, avg_reliability, source_count = analyze_source_reliability(sources)
+    logger.info(f"After analysis: {source_count} sources found, {len(found_sources)} sources in list")
     
     # ✅ Check for fake indicators
     fake_count, fake_sources = check_fake_indicators(text_query, sources)
